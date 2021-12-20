@@ -54,11 +54,9 @@ namespace WPF_Samples
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            //Toast.Show("这是一个友好的提示-上", 1000, ToastPosition.Top);
-
-            //Toast.Show("这是一个友好的提示-中", 1000, ToastPosition.Center);
-
-            //Toast.Show("这是一个友好的提示-下", 1000, ToastPosition.Bottom);
+            FillRateWindow fillRateWindow = new FillRateWindow();
+            fillRateWindow.fillRateModel = FillRateModel.TestData();
+            fillRateWindow.Show();
         }
 
         private void HWTosat_Click(object sender, RoutedEventArgs e)

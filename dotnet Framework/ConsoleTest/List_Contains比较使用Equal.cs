@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleTest
 {
-    public class 测试ListContains比较使用Equal
+    public class List_Contains比较使用Equal
     {
         public static void Process()
         {

@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="测试ListContains比较使用Equal.cs" />
+    <Compile Include="List_Sort测试.cs" />
+    <Compile Include="List_Contains比较使用Equal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

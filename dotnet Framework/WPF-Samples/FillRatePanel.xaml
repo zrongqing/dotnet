@@ -1,0 +1,57 @@
+﻿<Window x:Class="WPF_Samples.FillRateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Samples"
+        mc:Ignorable="d"
+        Title="FillRate" Height="450" Width="800">
+    <Grid x:Name="Grid_Result_List" Margin="0,50,0,0">
+        <Grid.Resources>
+            <Style TargetType="DataGrid">
+                <!--网格线颜色-->
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"></Setter>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"></Setter>
+                <Setter Property="HorizontalGridLinesBrush">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#F2F2F2"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="VerticalGridLinesBrush">
+                    <Setter.Value>
+                        <SolidColorBrush Color="#F2F2F2"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <DataTemplate x:Key="Cell_Main">
+                <TextBlock Text="{Binding Type}" ToolTip="{Binding StrMain}" VerticalAlignment="Center"  Foreground="Black"
+                                       HorizontalAlignment="Center" TextAlignment="Center" />
+            </DataTemplate>
+
+            <DataTemplate x:Key="Cell_Second">
+                <TextBlock Text="{Binding CurFillRate}" ToolTip="{Binding StrSecond}" VerticalAlignment="Center"  Foreground="Black" HorizontalAlignment="Center" TextAlignment="Center" />
+            </DataTemplate>
+            <DataTemplate x:Key="Cell_state">
+                <TextBlock Text="{Binding LimitFillRate}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </DataTemplate>
+        </Grid.Resources>
+        <DataGrid x:Name="DataGrid_Result"  ItemsSource="{Binding FillRateList}" ColumnHeaderHeight="30" HeadersVisibility="Column" RowHeight="25"
+                              CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False"
+                              AutoGenerateColumns="False"   SelectionMode="Single" SelectionUnit="FullRow"  
+                              BorderThickness="1" BorderBrush="#F2F2F2" EnableRowVirtualization ="True" MinHeight="100">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn x:Name="column_ListMain" Header="桥架类型"  MinWidth="90" Width="92.5*"  CellTemplate="{StaticResource Cell_Main}" />
+                <DataGridTemplateColumn x:Name="column_ListSecond" Header="实际填充率%"  MinWidth="90" Width="92.5*"  CellTemplate="{StaticResource Cell_Second}"/>
+                <DataGridTemplateColumn x:Name="column_ListState" Header="限定值%"   MinWidth="65" Width="75*"  CellTemplate="{StaticResource Cell_state}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>

@@ -45,6 +45,7 @@
     <Compile Include="CloneTool\ObjectClone.cs" />
     <Compile Include="ConfigTool\IXMLConfig.cs" />
     <Compile Include="ConfigTool\XMLConfigManage.cs" />
+    <Compile Include="ConfigTool\XMLConfigSingleTemplate.cs" />
     <Compile Include="FileTool\FolderHelper.cs" />
     <Compile Include="MathTool\MathTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
