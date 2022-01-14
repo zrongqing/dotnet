@@ -89,10 +89,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\dotnetTool\dotnetTool.csproj">
-      <Project>{d94f5443-33ee-4d90-a97f-1ad844141523}</Project>
-      <Name>dotnetTool</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HWCommonUI\HWCommonUI.csproj">
       <Project>{3d948a60-5051-4546-a882-0ce0f1d312ed}</Project>
       <Name>HWCommonUI</Name>

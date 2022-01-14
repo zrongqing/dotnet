@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnetTool", "dotnetTool\dotnetTool.csproj", "{D94F5443-33EE-4D90-A97F-1AD844141523}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HWCommonUI", "HWCommonUI\HWCommonUI.csproj", "{3D948A60-5051-4546-A882-0CE0F1D312ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF-Samples", "WPF-Samples\WPF-Samples.csproj", "{1C1E160E-3858-4592-B934-8C7C2EC9B288}"
@@ -13,16 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreePage", "TreePage\TreePage.csproj", "{6AAF4684-15E3-431D-A08C-BD0FABF17C45}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnetUtility", "..\dotnetUtility\dotnetUtility.csproj", "{ACE073C1-6A58-4913-A362-7B0088D44949}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D94F5443-33EE-4D90-A97F-1AD844141523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D94F5443-33EE-4D90-A97F-1AD844141523}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D94F5443-33EE-4D90-A97F-1AD844141523}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D94F5443-33EE-4D90-A97F-1AD844141523}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3D948A60-5051-4546-A882-0CE0F1D312ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3D948A60-5051-4546-A882-0CE0F1D312ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D948A60-5051-4546-A882-0CE0F1D312ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{6AAF4684-15E3-431D-A08C-BD0FABF17C45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AAF4684-15E3-431D-A08C-BD0FABF17C45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AAF4684-15E3-431D-A08C-BD0FABF17C45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACE073C1-6A58-4913-A362-7B0088D44949}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACE073C1-6A58-4913-A362-7B0088D44949}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACE073C1-6A58-4913-A362-7B0088D44949}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACE073C1-6A58-4913-A362-7B0088D44949}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

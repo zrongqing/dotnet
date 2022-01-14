@@ -23,6 +23,7 @@ namespace WPF_Samples
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,7 +39,7 @@ namespace WPF_Samples
             HWProgressBarDialog.Instance.StartLoop();
             for (int i = 0; i < int.MaxValue; i++)
             {
-                if(HWProgressBarDialog.IsClose)
+                if (HWProgressBarDialog.IsClose)
                 {
                     break;
                 }
@@ -49,7 +50,7 @@ namespace WPF_Samples
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Visibility = Visibility.Collapsed;
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)
@@ -61,25 +62,25 @@ namespace WPF_Samples
 
         private void HWTosat_Click(object sender, RoutedEventArgs e)
         {
-           HWToast.Show("容器左上角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerTopLeft, Time = 1000 });
-           HWToast.Show("容器上中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerTopCenter, Time = 1000 });
-           HWToast.Show("容器右上角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerTopRight, Time = 1000 });
-           HWToast.Show("容器左中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerLeft, Time = 1000 });
-           HWToast.Show("容器中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerCenter, Time = 1000, Closed = closed, Click = click });
-           HWToast.Show("容器右中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerRight, Time = 1000 });
-           HWToast.Show("容器左下角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerBottomLeft, Time = 1000 });
-           HWToast.Show("容器下中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerBottomCenter, Time = 1000 });
-           HWToast.Show("容器右下角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerBottomRight, Time = 1000 });
-           
-           HWToast.Show("屏幕左上角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenTopLeft, Time = 1000 });
-           HWToast.Show("屏幕上中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenTopCenter, Time = 1000 });
-           HWToast.Show("屏幕右上角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenTopRight, Time = 1000 });
-           HWToast.Show("屏幕左中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenLeft, Time = 1000 });
-           HWToast.Show("屏幕中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenCenter, Time = 1000 });
-           HWToast.Show("屏幕右中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenRight, Time = 1000 });
-           HWToast.Show("屏幕左下角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenBottomLeft, Time = 1000 });
-           HWToast.Show("屏幕下中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenBottomCenter, Time = 1000 });
-           HWToast.Show("屏幕右下角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenBottomRight, Time = 1000 });
+            HWToast.Show("容器左上角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerTopLeft, Time = 1000 });
+            HWToast.Show("容器上中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerTopCenter, Time = 1000 });
+            HWToast.Show("容器右上角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerTopRight, Time = 1000 });
+            HWToast.Show("容器左中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerLeft, Time = 1000 });
+            HWToast.Show("容器中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerCenter, Time = 1000, Closed = closed, Click = click });
+            HWToast.Show("容器右中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerRight, Time = 1000 });
+            HWToast.Show("容器左下角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerBottomLeft, Time = 1000 });
+            HWToast.Show("容器下中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerBottomCenter, Time = 1000 });
+            HWToast.Show("容器右下角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.OwnerBottomRight, Time = 1000 });
+
+            HWToast.Show("屏幕左上角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenTopLeft, Time = 1000 });
+            HWToast.Show("屏幕上中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenTopCenter, Time = 1000 });
+            HWToast.Show("屏幕右上角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenTopRight, Time = 1000 });
+            HWToast.Show("屏幕左中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenLeft, Time = 1000 });
+            HWToast.Show("屏幕中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenCenter, Time = 1000 });
+            HWToast.Show("屏幕右中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenRight, Time = 1000 });
+            HWToast.Show("屏幕左下角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenBottomLeft, Time = 1000 });
+            HWToast.Show("屏幕下中间", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenBottomCenter, Time = 1000 });
+            HWToast.Show("屏幕右下角", new ToastOptions { Icon = ToastIcons.Information, Location = ToastLocation.ScreenBottomRight, Time = 1000 });
         }
 
         private void click(object sender, EventArgs e)
