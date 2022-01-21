@@ -27,14 +27,14 @@ namespace dotnetTool.ConfigTool
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public virtual T Load(string filePath)
+        public virtual T? Load(string filePath)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-            xmlSerializer.UnknownNode += new XmlNodeEventHandler(serializer_UnknownNode);
-            xmlSerializer.UnknownAttribute += new XmlAttributeEventHandler(serializer_UnknownAttribute);
+            //xmlSerializer.UnknownNode += new XmlNodeEventHandler(serializer_UnknownNode);
+            //xmlSerializer.UnknownAttribute += new XmlAttributeEventHandler(serializer_UnknownAttribute);
 
-            FileStream fs = null;
-            T obj = default(T);
+            FileStream? fs = null;
+            T? obj = default(T);
             try
             {
                 fs = new FileStream(filePath, FileMode.Open);

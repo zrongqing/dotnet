@@ -13,9 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using HWCommonUI.HWControl.HWProcessBar;
+using RQ.UI.HWProcessBar;
 
-namespace HWCommonUI.HWControl
+namespace RQ.UI
 {
     /// <summary>
     /// HWProgressBar2.xaml 的交互逻辑

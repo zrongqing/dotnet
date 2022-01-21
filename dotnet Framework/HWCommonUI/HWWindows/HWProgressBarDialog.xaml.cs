@@ -13,9 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using HWCommonUI.HWComponentModel;
+using RQ.HWComponentModel;
 
-namespace HWCommonUI.HWWindows
+namespace RQ.HWWindows
 {
     /// <summary>
     /// HWProgressBarTemp.xaml 的交互逻辑
@@ -147,7 +147,7 @@ namespace HWCommonUI.HWWindows
             this.Show();
 
             // 再启动一个线程进行自循环
-            this.hwBar.Dispatcher.Invoke(new Action<DependencyProperty, object>(hwBar.SetValue), System.Windows.Threading.DispatcherPriority.Input, HWControl.HWProgressBar.HWProgressBarModeProperty, HWCommonUI.HWControl.HWProcessBar.HWProgressBarMode.Loop);
+            this.hwBar.Dispatcher.Invoke(new Action<DependencyProperty, object>(hwBar.SetValue), System.Windows.Threading.DispatcherPriority.Input, UI.HWProgressBar.HWProgressBarModeProperty, RQ.UI.HWProcessBar.HWProgressBarMode.Loop);
         }
 
         public HWProgressBarDialog()

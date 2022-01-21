@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace RQ.UIConverter
+namespace RQ.UI.WPF.UIConverter
 {
     /// <summary>
     /// ColorSolidColorBrush的颜色互相转化 主要是button的背景颜色需要
     /// </summary>
-    class ColorSolidColorBrushConvt : System.Windows.Data.IValueConverter
+    public class ColorSolidColorBrushConvt : System.Windows.Data.IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

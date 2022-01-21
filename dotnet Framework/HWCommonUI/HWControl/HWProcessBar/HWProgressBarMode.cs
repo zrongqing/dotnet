@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HWCommonUI.HWControl.HWProcessBar
+namespace RQ.UI.HWProcessBar
 {
     public enum HWProgressBarMode
     {

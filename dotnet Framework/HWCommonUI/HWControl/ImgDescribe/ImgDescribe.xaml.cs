@@ -13,10 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HWCommonUI.ImgDescribe
+namespace RQ.ImgDescribe
 {
     using System.ComponentModel;
-    using HWCommonUI.HWControl.ImgDescribe;
+    using RQ.UI.ImgDescribe;
     /// <summary>
     /// ImgDescribe.xaml 的交互逻辑
     /// </summary>

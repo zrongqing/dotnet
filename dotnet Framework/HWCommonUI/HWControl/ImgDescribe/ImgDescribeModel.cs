@@ -1,5 +1,5 @@
 ﻿using System;
-using HWCommonUI.HWComponentModel;
+using RQ.HWComponentModel;
 using System.Windows.Data;
 using System.Globalization;
 using System.Windows.Media.Imaging;
@@ -7,7 +7,7 @@ using System.IO;
 using System.Windows;
 
 
-namespace HWCommonUI.HWControl.ImgDescribe
+namespace RQ.UI.ImgDescribe
 {
 
     /// <summary>

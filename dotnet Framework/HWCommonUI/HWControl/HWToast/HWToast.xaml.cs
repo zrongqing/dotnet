@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace HWCommonUI.HWControl.HWToast
+namespace RQ.UI.HWToast
 {
     /// <summary>
     /// 悬浮框的按钮

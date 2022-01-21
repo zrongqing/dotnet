@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace RQ.UIConverter
+namespace RQ.UI.WPF.UIConverter
 {
     /// <summary>
     /// 将图片路径转换成Bit不占用图片

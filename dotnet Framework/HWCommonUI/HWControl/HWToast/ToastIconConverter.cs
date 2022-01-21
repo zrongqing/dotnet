@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using FontAwesome;
 
-namespace HWCommonUI.HWControl.HWToast
+namespace RQ.UI.HWToast
 {
     public class ToastIconConverter : IMultiValueConverter
     {

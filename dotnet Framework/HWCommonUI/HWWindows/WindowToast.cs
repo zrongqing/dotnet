@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HWCommonUI.HWWindows
+namespace RQ.HWWindows
 {
     public class WindowToast
     {

@@ -37,7 +37,7 @@ namespace DotNetTool.CloneTool
         /// 字节流的克隆
         /// </summary>
         /// <returns></returns>
-        public static T Clone<T>(T source)
+        public static T? Clone<T>(T source)
         {
             if (!typeof(T).IsSerializable)
             {
@@ -53,35 +53,15 @@ namespace DotNetTool.CloneTool
             Stream stream = new MemoryStream();
             using (stream)
             {
+#pragma warning disable SYSLIB0011 // 类型或成员已过时
                 formatter.Serialize(stream, source);
+#pragma warning restore SYSLIB0011 // 类型或成员已过时
                 stream.Seek(0, SeekOrigin.Begin);
+#pragma warning disable SYSLIB0011 // 类型或成员已过时
                 return (T)formatter.Deserialize(stream);
+#pragma warning restore SYSLIB0011 // 类型或成员已过时
             }
         }
 
-        /// <summary>
-        /// xml序列化克隆
-        /// </summary>
-        /// x<typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static T Clone_XMLSerializer<T>(T t)
-        {
-            T clone = default(T);
-            using (Stream stream = new MemoryStream())
-            {
-                try
-                {
-                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-                    xmlSerializer.Serialize(stream, t);
-                    stream.Seek(0, SeekOrigin.Begin);
-                    clone = (T)xmlSerializer.Deserialize(stream);
-                }
-                catch (SerializationException e)
-                {
-                    Console.WriteLine("Failed to serialize. Reason: " + e.Message);
-                }
-            }
-            return clone;
-        }
     }
 }

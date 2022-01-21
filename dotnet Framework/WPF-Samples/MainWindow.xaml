@@ -4,18 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Samples"
-        xmlns:HWButton="clr-namespace:HWCommonUI.HWControl.HWButton;assembly=HWCommonUI" xmlns:HWControl="clr-namespace:HWCommonUI.HWControl;assembly=HWCommonUI" x:Class="WPF_Samples.MainWindow"
+        x:Class="WPF_Samples.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
-        <HWButton:ColorSelButton HorizontalAlignment="Left" Height="25" Margin="97,15,0,0" VerticalAlignment="Top" Width="108"/>
-        <Label x:Name="label" Content="颜色选择控件" HorizontalAlignment="Left" Margin="10,13,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button" Content="进度条测试" HorizontalAlignment="Left" Margin="17,65,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-        <Button x:Name="button1" Content="隐藏界面" HorizontalAlignment="Left" Margin="160,85,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
-        <Button x:Name="button2" Content="测试windowtoast" HorizontalAlignment="Left" Margin="365,55,0,0" VerticalAlignment="Top" Width="75" Click="button2_Click"/>
-
-        <Button x:Name="HWTosat" Content="HWTosat" HorizontalAlignment="Left" Margin="465,145,0,0" VerticalAlignment="Top" Width="75" Click="HWTosat_Click"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="235,245,0,0" VerticalAlignment="Top" Width="120" IsEditable="true" Text="{Binding cbText}" ItemsSource="{Binding cbItemsSource}"/>
     </Grid>
 </Window>

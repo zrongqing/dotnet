@@ -36,9 +36,6 @@ namespace dotnetTool.ConfigTool
     internal class XMLConfigExample : XMLConfigSingleTemplate<XMLConfigExample>
     {
         // 自定义 路径 可选
-        public override string XMLFilePath { get; set; } = null;
-
-        // 被序列化的类
-        ExampleClass exampleClass;
+        public override string XMLFilePath { get; set; } = String.Empty;
     }
 }

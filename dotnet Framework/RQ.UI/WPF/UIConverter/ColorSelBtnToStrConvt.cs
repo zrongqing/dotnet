@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace RQ.UIConverter
+namespace RQ.UI.WPF.UIConverter
 {
     /// <summary>
     /// 将Color的颜色转换成指定字符串
     /// </summary>
     /// <see cref="RQ.HWUserControl.ColorSelButton"/>
-    class ColorSelBtnToStrConvt : System.Windows.Data.IValueConverter
+    public class ColorSelBtnToStrConvt : System.Windows.Data.IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

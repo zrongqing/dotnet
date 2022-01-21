@@ -19,7 +19,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HWCommonUI.RegularExpression
+namespace RQ.RegularExpression
 {
     /// <summary>
     /// 正则表达式工具

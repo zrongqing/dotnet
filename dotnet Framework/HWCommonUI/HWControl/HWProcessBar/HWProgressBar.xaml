@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="HWCommonUI.HWControl.HWProgressBar"
+﻿<UserControl x:Class="RQ.UI.HWProgressBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:HWCommonUI.HWControl"
+             xmlns:local="clr-namespace:RQ.UI"
              mc:Ignorable="d" d:DesignWidth="265" Width="265" Height="85" Unloaded="UserControl_Unloaded" ContextMenuClosing="UserControl_ContextMenuClosing">
     <Grid>
         <Grid.RowDefinitions>

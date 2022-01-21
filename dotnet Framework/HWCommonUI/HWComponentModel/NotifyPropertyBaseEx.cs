@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace HWCommonUI.HWComponentModel
+namespace RQ.HWComponentModel
 {
     public static class NotifyPropertyBaseEx
     {

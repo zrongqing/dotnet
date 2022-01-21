@@ -1,4 +1,4 @@
-﻿using HWCommonUI.HWComponentModel;
+﻿using RQ.HWComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

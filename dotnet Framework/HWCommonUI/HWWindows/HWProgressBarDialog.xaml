@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HWCommonUI.HWWindows"
-        xmlns:HWControls="clr-namespace:HWCommonUI.HWControl" x:Class="HWCommonUI.HWWindows.HWProgressBarDialog"
+        xmlns:local="clr-namespace:RQ.HWWindows"
+        xmlns:HWControls="clr-namespace:RQ.UI" x:Class="RQ.HWWindows.HWProgressBarDialog"
         mc:Ignorable="d"
         Title="进度条" Height="160" Width="455" Closing="Window_Closing" Closed="Window_Closed" ResizeMode="NoResize">
     <StackPanel x:Name="stackPanel">

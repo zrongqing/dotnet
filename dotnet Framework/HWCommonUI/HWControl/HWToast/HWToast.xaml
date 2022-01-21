@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="HWCommonUI.HWControl.HWToast.HWToast"
+﻿<UserControl x:Class="RQ.UI.HWToast.HWToast"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:HWCommonUI.HWControl.HWToast"
+             xmlns:local="clr-namespace:RQ.UI.HWToast"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" Height="{Binding Height}" Width="{Binding Width}" MouseLeftButtonDown="UserControl_MouseLeftButtonDown"
              d:DesignHeight="48" d:DesignWidth="200" MinWidth="200" MaxWidth="500" Focusable="False" Background="Transparent">

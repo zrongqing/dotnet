@@ -17,7 +17,7 @@ namespace dotnetTool.FileTool
         /// <param name="overwrite"></param>
         /// <param name="arrExtenion">指定复制的文件后缀</param>
         /// <returns>返回提示信息，成功，返回""</returns>
-        public static string CopyFun(string sourceFolderName, string destFolderName, bool overwrite = false, string[] arrExtenion = null)
+        public static string CopyFun(string sourceFolderName, string destFolderName, bool overwrite = false, string[]? arrExtenion = null)
         {
             try
             {
