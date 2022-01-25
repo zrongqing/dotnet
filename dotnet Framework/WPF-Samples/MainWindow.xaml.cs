@@ -56,5 +56,10 @@ namespace WPF_Samples
         {
 
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.MessageBox.Show("asd", "asd");
+        }
     }
 }

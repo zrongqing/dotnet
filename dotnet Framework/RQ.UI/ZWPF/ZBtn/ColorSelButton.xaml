@@ -1,16 +1,16 @@
-﻿<UserControl x:Class="RQ.UI.WPF.Btn.ColorSelButton"
+﻿<UserControl x:Class="RQ.UI.ZWPF.ZBtn.ColorSelButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:RQ.UI.WPF"
-             xmlns:HWCommonUI ="clr-namespace:RQ.UI.WPF.UIConverter"
+             xmlns:local="clr-namespace:RQ.UI.ZWPF.ZBtn"
+             xmlns:HWCommonUI ="clr-namespace:RQ.UI.ZWPF.UIConverter"
              mc:Ignorable="d" 
              d:DesignHeight="35" d:DesignWidth="145">
 
     <UserControl.Resources>
         <ResourceDictionary>
-            <HWCommonUI:ColorSelBtnToStrConvt x:Key="ColorSelBtnToStrConvt"/>
+            <local:ColorSelBtnToStrConvt x:Key="ColorSelBtnToStrConvt"/>
             <HWCommonUI:ColorSolidColorBrushConvt x:Key="ColorSolidColorBrushConvt"/>
         </ResourceDictionary>
     </UserControl.Resources>

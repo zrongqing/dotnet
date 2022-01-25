@@ -5,14 +5,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace RQ.UI.WPF.UIConverter
+namespace RQ.UI.ZWPF.UIConverter
 {
     /// <summary>
-    /// 将图片路径转换成Bit取消对文件的占用
+    /// 将图片路径转换成Bit不占用图片
     /// </summary>
-    public class ImgPathToBitConvt : System.Windows.Data.IValueConverter
+    public class StrImgConverter : System.Windows.Data.IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -41,7 +42,7 @@ namespace RQ.UI.WPF.UIConverter
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null;
+            throw new NotImplementedException();
         }
     }
 }

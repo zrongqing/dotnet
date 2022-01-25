@@ -1,14 +1,12 @@
-﻿<Window
+﻿<Window x:Class="RQ.UI.ZWPF.ZMessageBox.MessageBox"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPF_Samples"
-        x:Class="WPF_Samples.MainWindow"
+        xmlns:local="clr-namespace:RQ.UI.ZWPF.ZMessageBox"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MessageBox" Height="150" Width="330">
     <Grid>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="300,175,0,0" VerticalAlignment="Top" Click="button_Click"/>
-        <RadioButton></RadioButton>
+        
     </Grid>
 </Window>

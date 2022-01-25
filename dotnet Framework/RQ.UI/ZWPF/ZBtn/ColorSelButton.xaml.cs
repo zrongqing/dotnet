@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RQ.UI.WPF.Btn
+namespace RQ.UI.ZWPF.ZBtn
 {
     /// <summary>
     /// ColorSelButton.xaml 的交互逻辑
@@ -108,6 +108,31 @@ namespace RQ.UI.WPF.Btn
 
                 SelColor = Color.FromArgb(colorChoosed.A, colorChoosed.R, colorChoosed.G, colorChoosed.B);
             }
+        }
+
+
+    }
+
+    /// <summary>
+    /// 将Color的颜色转换成指定字符串
+    /// </summary>
+    /// <see cref="RQ.HWUserControl.ColorSelButton"/>
+    public class ColorSelBtnToStrConvt : System.Windows.Data.IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value is Color)
+            {
+                Color color = (Color)value;
+                string colorStr = "RGB  " + color.R.ToString() + "-" + color.G.ToString() + "-" + color.B.ToString();
+                return colorStr;
+            }
+            return "<无替换>";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return null;
         }
     }
 }
