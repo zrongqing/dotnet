@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dotnetTool.ConfigTool
+namespace ZRQ.Utility.Config
 {
     public interface IXMLConfig<T>
     {

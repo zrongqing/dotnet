@@ -1,13 +1,13 @@
-﻿using dotnetTool.FileTool;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using ZRQ.Utility.Config;
 
-namespace dotnetTool.ConfigTool
+namespace ZRQ.Utility.ConfigTool
 {
     public class XMLConfigManage<T> : IXMLConfig<T>
     {
@@ -27,14 +27,14 @@ namespace dotnetTool.ConfigTool
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public virtual T? Load(string filePath)
+        public virtual T Load(string filePath)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
             //xmlSerializer.UnknownNode += new XmlNodeEventHandler(serializer_UnknownNode);
             //xmlSerializer.UnknownAttribute += new XmlAttributeEventHandler(serializer_UnknownAttribute);
 
             FileStream? fs = null;
-            T? obj = default(T);
+            T obj = default(T);
             try
             {
                 fs = new FileStream(filePath, FileMode.Open);
@@ -75,7 +75,7 @@ namespace dotnetTool.ConfigTool
                 {
                     if (!System.IO.File.Exists(filePath))
                     {
-                        FolderHelper.CreateFile(filePath);
+                        FileUtility.CreateFile(filePath);
                     }
                 }
 

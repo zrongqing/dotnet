@@ -10,8 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZRQ.Utility.Config;
 
-namespace dotnetTool.ConfigTool
+namespace ZRQ.Utility.ConfigTool
 {
     /// <summary>
     /// 

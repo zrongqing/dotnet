@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dotnetTool.ConfigTool
+namespace ZRQ.Utility.ConfigTool
 {
     internal class ExampleClass
     {

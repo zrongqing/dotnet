@@ -1,29 +1,11 @@
-﻿#region << 版 本 注 释 >>
-/*----------------------------------------------------------------
-* 项目名称 ：DotNetTool.CloneTool
-* 项目描述 ：
-* 类 名 称 ：ObjectCopier
-* 类 描 述 ：
-* 命名空间 ：DotNetTool.CloneTool
-* 作    者 ：zrq 
-* 创建时间 ：2020/11/12 15:18:03
-* 更新时间 ：2020/11/12 15:18:03
-*******************************************************************
-* Copyright @ 58317 2020. All rights reserved.
-*******************************************************************
-//----------------------------------------------------------------*/
-#endregion
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 
-namespace DotNetTool.CloneTool
+namespace ZRQ.Utility.Clone
 {
     /// <summary>
     /// 类的克隆扩展
@@ -37,7 +19,7 @@ namespace DotNetTool.CloneTool
         /// 字节流的克隆
         /// </summary>
         /// <returns></returns>
-        public static T? Clone<T>(T source)
+        public static T Clone<T>(T source)
         {
             if (!typeof(T).IsSerializable)
             {

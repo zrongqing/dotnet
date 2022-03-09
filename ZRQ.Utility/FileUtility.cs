@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace dotnetTool.FileTool
+namespace ZRQ.Utility
 {
-    class FolderHelper
+    class FileUtility
     {
         /// <summary>
         /// 复制文件夹的递归

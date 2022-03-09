@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace DotNetTool.MathTool
+namespace ZRQ.Utility
 {
-    public class MathTool
+    public class MathUtility
     {
         /// <summary>
         /// 四舍五入
