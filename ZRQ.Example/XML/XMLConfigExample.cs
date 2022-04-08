@@ -11,8 +11,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZRQ.Utility.ConfigTool;
 
-namespace ZRQ.Utility.ConfigTool
+namespace ZRQ.Example.XML
 {
     internal class ExampleClass
     {
@@ -36,6 +37,6 @@ namespace ZRQ.Utility.ConfigTool
     internal class XMLConfigExample : XMLConfigSingleTemplate<XMLConfigExample>
     {
         // 自定义 路径 可选
-        public override string XMLFilePath { get; set; } = String.Empty;
+        public override string XMLFilePath { get; set; } = string.Empty;
     }
 }
