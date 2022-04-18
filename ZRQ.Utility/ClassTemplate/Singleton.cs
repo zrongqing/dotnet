@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZRQ.Utility.ClassTemplate
+namespace ZRQ.Util.ClassTemplate
 {
     /// <summary>
     /// 单例

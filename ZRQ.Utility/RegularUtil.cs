@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace ZRQ.Utility.Regular
+namespace ZRQ.Util.Regular
 {
-    public class RegularUtility
+    public class RegularUtil
     {
         // 非负数
         public static readonly string Nonnegative = @"^(0|[1-9][0-9]*)(\.\d+)?$";

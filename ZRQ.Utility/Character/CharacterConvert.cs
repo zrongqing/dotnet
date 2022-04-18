@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZRQ.Utility.Character
+namespace ZRQ.Util.Character
 {
     public class CharacterConvert
     {

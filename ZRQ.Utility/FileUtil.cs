@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace ZRQ.Utility
+namespace ZRQ.Util
 {
-    class FileUtility
+    class FileUtil
     {
         /// <summary>
         /// 复制文件夹的递归

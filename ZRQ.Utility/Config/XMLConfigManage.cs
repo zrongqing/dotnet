@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using ZRQ.Utility.Config;
+using ZRQ.Util.Config;
 
-namespace ZRQ.Utility.ConfigTool
+namespace ZRQ.Util.ConfigTool
 {
     public class XMLConfigManage<T> : IXMLConfig<T>
     {
@@ -75,7 +75,7 @@ namespace ZRQ.Utility.ConfigTool
                 {
                     if (!System.IO.File.Exists(filePath))
                     {
-                        FileUtility.CreateFile(filePath);
+                        FileUtil.CreateFile(filePath);
                     }
                 }
 

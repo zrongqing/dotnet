@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ZRQ.Utility.ConfigTool;
+using ZRQ.Util.ConfigTool;
 
 namespace ZRQ.Example.XML
 {

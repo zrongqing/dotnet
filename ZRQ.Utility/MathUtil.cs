@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZRQ.Utility
+namespace ZRQ.Util
 {
-    public class MathUtility
+    public class MathUtil
     {
         /// <summary>
         /// 四舍五入

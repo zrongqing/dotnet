@@ -5,7 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace ZRQ.Utility.Clone
+namespace ZRQ.Util.Clone
 {
     /// <summary>
     /// 类的克隆扩展

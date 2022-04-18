@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZRQ.Utility.Config
+namespace ZRQ.Util.Config
 {
     public interface IXMLConfig<T>
     {
