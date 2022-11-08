@@ -29,7 +29,6 @@ namespace JsonTest
             jsonString = JsonSerializer.Serialize(weatherForecast, weatherForecast.GetType(), options);
             Console.WriteLine(jsonString);
 
-
         }
     }
 }

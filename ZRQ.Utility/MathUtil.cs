@@ -16,6 +16,17 @@ namespace ZRQ.Util
         {
             return Math.Round(value, n, MidpointRounding.AwayFromZero);
         }
+
+        /// <summary>
+        /// 弧度转化为角度
+        /// </summary>
+        /// <param name="radian">弧度</param>
+        /// <returns></returns>
+        public static double ToAngle(double radian)
+        {
+            return (radian * 180) / Math.PI;
+        }
+
         /// <summary>
         /// 角度转化为弧度
         /// </summary>
@@ -25,14 +36,14 @@ namespace ZRQ.Util
         {
             return angle * (Math.PI / 180);
         }
+
         /// <summary>
-        /// 弧度转化为角度
+        /// 向下整取
         /// </summary>
-        /// <param name="radian">弧度</param>
         /// <returns></returns>
-        public static double ToAngle(double radian)
+        internal static int IntDown()
         {
-            return (radian * 180) / Math.PI;
+            throw new NotSupportedException();
         }
     }
 }
