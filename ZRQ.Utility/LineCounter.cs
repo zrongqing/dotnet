@@ -28,11 +28,43 @@ public static class LineCounter
     }
     #endregion
 
-    public static int DirectoryCountLines(string directory)
+    private static int CountLines(string file)
+    {
+        int lineCount = 0;
+        string? line;
+        FileStream stream = new(file, FileMode.Open);
+        StreamReader reader = new(stream);
+        line = reader.ReadLine();
+        while (line is object)
+        {
+            if (line.Trim() != "")
+            {
+                lineCount++;
+            }
+            line = reader.ReadLine();
+        }
+
+        reader.Dispose();  // Automatically closes the stream
+        return lineCount;
+    }
+
+    static int DirectoryCountLines()
+    {
+        return DirectoryCountLines(
+            Directory.GetCurrentDirectory());
+    }
+
+    static int DirectoryCountLines(string directory)
+    {
+        return DirectoryCountLines(directory, "*.cs");
+    }
+
+    static int DirectoryCountLines(
+        string directory, string extension)
     {
         int lineCount = 0;
         foreach (string file in
-            Directory.GetFiles(directory, "*.cs"))
+            Directory.GetFiles(directory, extension))
         {
             lineCount += CountLines(file);
         }
@@ -43,28 +75,6 @@ public static class LineCounter
             lineCount += DirectoryCountLines(subdirectory);
         }
 
-        return lineCount;
-    }
-
-    private static int CountLines(string file)
-    {
-        string? line;
-        int lineCount = 0;
-        FileStream stream =
-            new FileStream(file, FileMode.Open);
-        StreamReader reader = new StreamReader(stream);
-        line = reader.ReadLine();
-
-        while (line != null)
-        {
-            if (line.Trim() != "")
-            {
-                lineCount++;
-            }
-            line = reader.ReadLine();
-        }
-
-        reader.Dispose();  // Automatically closes the stream
         return lineCount;
     }
 }
