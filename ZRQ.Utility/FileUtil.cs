@@ -66,7 +66,8 @@ namespace ZRQ.Util
         /// <returns> 根据filePath的位置 自动创建文件夹以及文件</returns>
         public static void CreateFile(string filePath)
         {
-            string dicPath = System.IO.Path.GetDirectoryName(filePath);
+            string? dicPath = System.IO.Path.GetDirectoryName(filePath);
+            if (null == dicPath) return;
 
             try
             {
@@ -77,9 +78,8 @@ namespace ZRQ.Util
                 var fileStream = File.Create(filePath);
                 fileStream.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
             }
         }
     }

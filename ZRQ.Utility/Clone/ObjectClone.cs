@@ -19,7 +19,7 @@ namespace ZRQ.Util.Clone
         /// 字节流的克隆
         /// </summary>
         /// <returns></returns>
-        public static T Clone<T>(T source)
+        public static T? Clone<T>(T source)
         {
             if (!typeof(T).IsSerializable)
             {

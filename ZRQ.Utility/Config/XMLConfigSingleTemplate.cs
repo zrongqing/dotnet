@@ -37,7 +37,7 @@ namespace ZRQ.Util.ConfigTool
         }
 
         #region Instance
-        static T _instance;
+        static T? _instance;
         static object _locker = new object();
         public static T Instance
         {

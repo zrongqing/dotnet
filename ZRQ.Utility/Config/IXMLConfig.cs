@@ -13,8 +13,8 @@ namespace ZRQ.Util.Config
         /// </summary>
         string XMLFilePath { get; set; }
 
-        T Load();
-        T Load(string filePath);
+        T? Load();
+        T? Load(string filePath);
 
         void Save();
         void Save(string filePath, object obj, bool createFile = true);

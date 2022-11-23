@@ -10,7 +10,12 @@ namespace ZRQ.Util.ClassTemplate
     /// <typeparam name="T"></typeparam>
     public class Singleton<T> : IDisposable where T : class, new()
     {
-        private static T _instance = null;
+        private static T? _instance = null;
+        public static T Ins
+        {
+            get { return _instance ?? (_instance = new T()); }
+        }
+
         public static T Instance()
         {
             if (null == _instance)
@@ -19,11 +24,6 @@ namespace ZRQ.Util.ClassTemplate
             }
             return _instance;
         }
-        public static T Ins
-        {
-            get { return _instance ?? (_instance = new T()); }
-        }
-
         public static void Reset()
         {
             if (null != _instance)

@@ -11,13 +11,13 @@ namespace ZRQ.Util.ConfigTool
 {
     public class XMLConfigManage<T> : IXMLConfig<T>
     {
-        public virtual string XMLFilePath { get; set; }
+        public virtual string XMLFilePath { get; set; } = String.Empty;
         /// <summary>
         /// 加载xml对象
         /// </summary>
         /// <returns></returns>
         /// <remarks>返回的xml取决于<see cref="XMLFilePath"/></remarks>
-        public virtual T Load()
+        public virtual T? Load()
         {
             string filePath = XMLFilePath;
             return this.Load(filePath);
@@ -27,18 +27,18 @@ namespace ZRQ.Util.ConfigTool
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public virtual T Load(string filePath)
+        public virtual T? Load(string filePath)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
             //xmlSerializer.UnknownNode += new XmlNodeEventHandler(serializer_UnknownNode);
             //xmlSerializer.UnknownAttribute += new XmlAttributeEventHandler(serializer_UnknownAttribute);
 
             FileStream? fs = null;
-            T obj = default(T);
+            T? obj = default(T);
             try
             {
                 fs = new FileStream(filePath, FileMode.Open);
-                obj = (T)xmlSerializer.Deserialize(fs);
+                obj = (T?)xmlSerializer.Deserialize(fs);
             }
             catch
             { }
