@@ -75,7 +75,7 @@ namespace ZRQ.Util.ConfigTool
                 {
                     if (!System.IO.File.Exists(filePath))
                     {
-                        FileUtil.CreateFile(filePath);
+                        FileUtils.CreateFile(filePath);
                     }
                 }
 
