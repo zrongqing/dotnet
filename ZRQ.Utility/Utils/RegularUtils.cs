@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace ZRQ.Util.Regular
 {
-    public class RegularUtil
+    public class RegularUtils
     {
         // 非负数
         public static readonly string Nonnegative = @"^(0|[1-9][0-9]*)(\.\d+)?$";

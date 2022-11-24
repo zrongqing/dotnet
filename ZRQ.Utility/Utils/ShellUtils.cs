@@ -8,7 +8,7 @@ namespace ZRQ.Util
     /// <summary>  
     /// 与控制台交互  
     /// </summary>  
-    public static class ShellUtil
+    public static class ShellUtils
     {
         [DllImport("kernel32.dll")]
         public static extern bool AllocConsole();

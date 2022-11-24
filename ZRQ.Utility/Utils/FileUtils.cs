@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ZRQ.Util
 {
-    class FileUtil
+    class FileUtils
     {
         /// <summary>
         /// 复制文件夹的递归

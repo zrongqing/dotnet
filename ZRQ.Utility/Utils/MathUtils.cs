@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZRQ.Util
 {
-    public class MathUtil
+    public class MathUtils
     {
         /// <summary>
         /// 四舍五入
