@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JsonTest
 {
-    internal class NewJsonTest
+    internal class SystemTestJsonTest
     {
         public static void Process()
         {
