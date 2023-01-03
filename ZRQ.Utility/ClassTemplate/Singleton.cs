@@ -14,7 +14,7 @@ namespace ZRQ.Utils.ClassTemplate
 
         public static T Ins
         {
-            get { return _instance ?? (_instance = new T()); }
+            get { return _instance ??= new T(); }
         }
 
         public static T Instance()
@@ -34,10 +34,7 @@ namespace ZRQ.Utils.ClassTemplate
             }
         }
 
-        public void Dispose()
-        {
-            DisposeImp();
-        }
+        public void Dispose() => DisposeImp();
 
         protected virtual void DisposeImp()
         {
