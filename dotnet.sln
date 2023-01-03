@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZRQ.Util", "ZRQ.Utility\ZRQ.Util.csproj", "{5345A97D-86BA-4DBA-A2D1-B4A0107B8DE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZRQ.Utils", "ZRQ.Utility\ZRQ.Utils.csproj", "{5345A97D-86BA-4DBA-A2D1-B4A0107B8DE2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZRQ.Test", "ZRQ.Test\ZRQ.Test.csproj", "{C5595379-EED5-47D4-9F66-8DCA7C2C996B}"
 EndProject

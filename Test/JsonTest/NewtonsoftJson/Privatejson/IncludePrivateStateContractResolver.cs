@@ -11,16 +11,6 @@ namespace JsonTest.NewtonsoftJson.Privatejson
 {
     public class IncludePrivateStateContractResolver : DefaultContractResolver
     {
-        protected override List<MemberInfo> GetSerializableMembers(Type objectType)
-        {
-            const BindingFlags BindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
-            var properties = objectType.GetProperties(BindingFlags);//.Where(p => p.HasSetter() && p.HasGetter());
-            var fields = objectType.GetFields(BindingFlags);
-
-            var allMembers = properties.Cast<MemberInfo>().Union(fields);
-            return allMembers.ToList();
-        }
-
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
             var prop = base.CreateProperty(member, memberSerialization);
@@ -52,6 +42,16 @@ namespace JsonTest.NewtonsoftJson.Privatejson
             }
 
             return prop;
+        }
+
+        protected override List<MemberInfo> GetSerializableMembers(Type objectType)
+        {
+            const BindingFlags BindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
+            var properties = objectType.GetProperties(BindingFlags);//.Where(p => p.HasSetter() && p.HasGetter());
+            var fields = objectType.GetFields(BindingFlags);
+
+            var allMembers = properties.Cast<MemberInfo>().Union(fields);
+            return allMembers.ToList();
         }
     }
 }

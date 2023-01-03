@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZRQ.Util;
+namespace ZRQ.Utils;
 
 public static class LineCounter
 {
     #region How to using
-    // Use the first argument as the directory
-    // to search, or default to the current directory
+
+    // Use the first argument as the directory to search, or default to the current directory
     private static void HowUsing(string[] args)
     {
         int totalLineCount = 0;
@@ -26,7 +26,8 @@ public static class LineCounter
         totalLineCount = DirectoryCountLines(directory);
         System.Console.WriteLine(totalLineCount);
     }
-    #endregion
+
+    #endregion How to using
 
     private static int CountLines(string file)
     {
@@ -48,18 +49,18 @@ public static class LineCounter
         return lineCount;
     }
 
-    static int DirectoryCountLines()
+    private static int DirectoryCountLines()
     {
         return DirectoryCountLines(
             Directory.GetCurrentDirectory());
     }
 
-    static int DirectoryCountLines(string directory)
+    private static int DirectoryCountLines(string directory)
     {
         return DirectoryCountLines(directory, "*.cs");
     }
 
-    static int DirectoryCountLines(
+    private static int DirectoryCountLines(
         string directory, string extension)
     {
         int lineCount = 0;

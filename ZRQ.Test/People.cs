@@ -8,10 +8,11 @@ namespace ZRQ.Test
 {
     internal class People
     {
-        public string Name { get; set; }
         public People()
         {
             this.Name = "无名";
         }
+
+        public string Name { get; set; }
     }
 }

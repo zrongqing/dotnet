@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ZRQ.Util.Character
+namespace ZRQ.Utils.Character
 {
     public class CharacterConvert
     {
         /// <summary>
         /// 英文字符转为中文字符
         /// </summary>
-        /// <param name="text">转换的中文字符串</param>
-        /// <returns></returns>
+        /// <param name="text"> 转换的中文字符串 </param>
+        /// <returns> </returns>
         public static string ConvertToEn(string text)
         {
             const string ch = "。；，？！、“”‘’（）—";//中文字符

@@ -5,7 +5,7 @@ namespace ZRQ.IReadOnlyCollectionExample
 {
     internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
             IReadOnlyList<int> readOnlylist = new List<int>()
@@ -35,20 +35,22 @@ namespace ZRQ.IReadOnlyCollectionExample
             Console.ReadKey();
         }
 
-        private static void TestReadOnlyClass(IReadOnlyList<ReadOnlyClass> readOnlylist2)
-        {
-            readOnlylist2[0].Id = 2;
-        }
-
         private static void TestIReadOnlyList(IReadOnlyList<int> list)
         {
             //list[0] = 2;
+        }
+
+        private static void TestReadOnlyClass(IReadOnlyList<ReadOnlyClass> readOnlylist2)
+        {
+            readOnlylist2[0].Id = 2;
         }
     }
 
     internal class ReadOnlyClass
     {
-        public ReadOnlyClass() { }
+        public ReadOnlyClass()
+        { }
+
         public int Id { get; set; }
     }
 }

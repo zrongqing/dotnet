@@ -5,20 +5,18 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace ZRQ.Util.Clone
+namespace ZRQ.Utils.Clone
 {
     /// <summary>
     /// 类的克隆扩展
     /// </summary>
-    /// <remarks>
-    /// 参考 http://www.codeproject.com/KB/tips/SerializedObjectCloner.aspx
-    /// </remarks>
+    /// <remarks> 参考 http://www.codeproject.com/KB/tips/SerializedObjectCloner.aspx </remarks>
     public static class ObjectClone
     {
         /// <summary>
         /// 字节流的克隆
         /// </summary>
-        /// <returns></returns>
+        /// <returns> </returns>
         public static T? Clone<T>(T source)
         {
             if (!typeof(T).IsSerializable)
@@ -44,6 +42,5 @@ namespace ZRQ.Util.Clone
 #pragma warning restore SYSLIB0011 // 类型或成员已过时
             }
         }
-
     }
 }

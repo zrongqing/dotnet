@@ -17,14 +17,12 @@ Object ob = new();
 
 var aa = peopleTwo as Interface1;
 
-
 if (people is Interface1)
 {
     var b = (PeopleTwo)peopleTwo;
     var asd = peopleTwo as Interface1;
 
     //var bvb = people as PeopleTwo;
-
 }
 
 Console.ReadKey();

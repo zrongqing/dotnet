@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZRQ.Util.Config
+namespace ZRQ.Utils.Config
 {
     public interface IXMLConfig<T>
     {
@@ -14,9 +14,11 @@ namespace ZRQ.Util.Config
         string XMLFilePath { get; set; }
 
         T? Load();
+
         T? Load(string filePath);
 
         void Save();
+
         void Save(string filePath, object obj, bool createFile = true);
     }
 }

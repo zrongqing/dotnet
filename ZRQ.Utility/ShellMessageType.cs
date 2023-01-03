@@ -1,4 +1,4 @@
-﻿namespace ZRQ.Util;
+﻿namespace ZRQ.Utils;
 
 /// <summary>
 /// 消息类型种类
@@ -9,14 +9,17 @@ public enum ShellMessageType
     /// 默认
     /// </summary>
     DEFAULT = 0,
+
     /// <summary>
     /// 错误
     /// </summary>
     ERROR,
+
     /// <summary>
     /// 警告
     /// </summary>
     WARNING,
+
     /// <summary>
     /// 注意
     /// </summary>
