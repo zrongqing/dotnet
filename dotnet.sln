@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeTest", "Test\TypeTest\T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonTest", "Test\JsonTest\JsonTest.csproj", "{51CC0B5B-5EDB-4BAA-A402-1C23A24C1F87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTest", "EventTest\EventTest.csproj", "{4284C0DF-F44D-478D-A862-F85F4781C19B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{51CC0B5B-5EDB-4BAA-A402-1C23A24C1F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51CC0B5B-5EDB-4BAA-A402-1C23A24C1F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51CC0B5B-5EDB-4BAA-A402-1C23A24C1F87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4284C0DF-F44D-478D-A862-F85F4781C19B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4284C0DF-F44D-478D-A862-F85F4781C19B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4284C0DF-F44D-478D-A862-F85F4781C19B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4284C0DF-F44D-478D-A862-F85F4781C19B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{D06281C5-0993-40F1-A01E-59A0AE8582B5} = {E8546A32-90A5-4B34-BDE7-104F4C223909}
 		{F54BE604-E247-49E4-A3BB-4A31078017FD} = {1225CC05-426D-47D8-8885-0E7B6CEA1357}
 		{51CC0B5B-5EDB-4BAA-A402-1C23A24C1F87} = {1225CC05-426D-47D8-8885-0E7B6CEA1357}
+		{4284C0DF-F44D-478D-A862-F85F4781C19B} = {1225CC05-426D-47D8-8885-0E7B6CEA1357}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72533C9D-1D61-4C9D-AFC4-A6C9AF68FC45}
