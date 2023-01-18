@@ -1,4 +1,5 @@
-﻿using static EventTest.Thermostat;
+﻿using System.Collections;
+using static EventTest.Thermostat;
 
 namespace EventTest
 {
@@ -214,7 +215,7 @@ namespace EventTest
             // Console.WriteLine("解除原始变量后的委托后调用");
             //thermostat.EventHandler -= heater.OnTemperatureChanged; // error
             thermostat.CurrentTemperature = int.Parse("192");
-            
+
             // 结论: 其实如果能正常把 event 对象给弄出来, 也是跟委托是一样的. 
             #endregion
         }
