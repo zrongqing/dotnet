@@ -98,25 +98,63 @@
 
             #region 将“-=”操作符应用于委托会返回新实例
 
-            thermostat.OnTemperatureChange +=
-                heater.OnTemperatureChanged;
-            thermostat.OnTemperatureChange +=
-                cooler.OnTemperatureChanged;
+            //thermostat.OnTemperatureChange +=
+            //    heater.OnTemperatureChanged;
+            //thermostat.OnTemperatureChange +=
+            //    cooler.OnTemperatureChanged;
 
-            // 缓冲一下现在的状态
-            Action<float> localOnChange = thermostat.OnTemperatureChange;
-            thermostat.CurrentTemperature = int.Parse("200");
+            //// 缓冲一下现在的状态
+            //Action<float> localOnChange = thermostat.OnTemperatureChange;
+            //thermostat.CurrentTemperature = int.Parse("200");
 
-            Console.WriteLine("解除临时变量后的委托后调用");
-            localOnChange -= heater.OnTemperatureChanged;
-            thermostat.CurrentTemperature = int.Parse("199");
+            //Console.WriteLine("解除临时变量后的委托后调用");
+            //localOnChange -= heater.OnTemperatureChanged;
+            //thermostat.CurrentTemperature = int.Parse("199");
 
-            Console.WriteLine("解除原始变量后的委托后调用");
-            thermostat.OnTemperatureChange -= heater.OnTemperatureChanged;
-            thermostat.CurrentTemperature = int.Parse("198");
+            //Console.WriteLine("解除原始变量后的委托后调用");
+            //thermostat.OnTemperatureChange -= heater.OnTemperatureChanged;
+            //thermostat.CurrentTemperature = int.Parse("198");
 
             #endregion
 
+            #region 如果是"+=" 呢?
+
+            thermostat.OnTemperatureChange +=
+                heater.OnTemperatureChanged;
+            //// 缓冲一下现在的状态
+            //Action<float> localOnChange = thermostat.OnTemperatureChange;
+            //thermostat.CurrentTemperature = int.Parse("197");
+
+            //Console.WriteLine("对临时变量, 附加事件后调用");
+            //localOnChange += cooler.OnTemperatureChanged;
+            //thermostat.CurrentTemperature = int.Parse("196");
+
+            //Console.WriteLine("对原始变量, 附加事件后调用");
+            //thermostat.OnTemperatureChange += cooler.OnTemperatureChanged;
+            //thermostat.CurrentTemperature = int.Parse("195");
+
+            #endregion
+
+
+            #region 如果我是用函数进行复制呢?
+
+            //Action<float> localOnChange = thermostat.OnTemperatureChange;
+            thermostat.CurrentTemperature = int.Parse("194");
+
+            Console.WriteLine("通过函数添加事件");
+            AddEvent(thermostat.OnTemperatureChange, cooler);
+            thermostat.CurrentTemperature = int.Parse("196");
+
+            Console.WriteLine("对原始变量, 附加事件后调用");
+            thermostat.OnTemperatureChange += cooler.OnTemperatureChanged;
+            thermostat.CurrentTemperature = int.Parse("195");
+
+            #endregion
+        }
+
+        private static void AddEvent(Action<float> onTemperatureChange, Cooler cooler)
+        {
+            onTemperatureChange += cooler.OnTemperatureChanged;
         }
     }
 }
