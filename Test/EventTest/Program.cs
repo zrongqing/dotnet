@@ -57,6 +57,20 @@
 
     public class Thermostat
     {
+        public class TemperatureArgs : System.EventArgs
+        {
+            public TemperatureArgs(float newTemperature)
+            {
+                NewTemperature = newTemperature;
+            }
+
+            public float NewTemperature { get; set; }
+        }
+
+        // Define the event publisher
+        public event EventHandler<TemperatureArgs> OnTemperatureChangeEvent =
+            delegate { };
+
         // Using C# 3.0 or later syntax.
         // Define the event publisher (initially without the sender)
         public Action<float>? OnTemperatureChange { get; set; }
@@ -70,6 +84,7 @@
                 {
                     _currentTemperature = value;
                     OnTemperatureChange?.Invoke(value);
+                    OnTemperatureChangeEvent(newTemperature);
                 }
             }
         }
@@ -119,8 +134,8 @@
 
             #region 如果是"+=" 呢?
 
-            thermostat.OnTemperatureChange +=
-                heater.OnTemperatureChanged;
+            //thermostat.OnTemperatureChange +=
+            //    heater.OnTemperatureChanged;
             //// 缓冲一下现在的状态
             //Action<float> localOnChange = thermostat.OnTemperatureChange;
             //thermostat.CurrentTemperature = int.Parse("197");
@@ -135,10 +150,8 @@
 
             #endregion
 
-
             #region 如果我是用函数进行复制呢?
 
-            //Action<float> localOnChange = thermostat.OnTemperatureChange;
             thermostat.CurrentTemperature = int.Parse("194");
 
             Console.WriteLine("通过函数添加事件");
