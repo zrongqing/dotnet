@@ -1,4 +1,6 @@
-﻿namespace EventTest
+﻿using static EventTest.Thermostat;
+
+namespace EventTest
 {
     /// <summary>
     /// 冷却器
@@ -23,6 +25,19 @@
             else
             {
                 System.Console.WriteLine($"Cooler: Off,newTemperature: {newTemperature}, temperature: {Temperature}");
+            }
+        }
+
+        public void OnTemperatureChanged(object? sender, TemperatureArgs e)
+        {
+            var newTemperature = e.NewTemperature;
+            if (newTemperature < Temperature)
+            {
+                System.Console.WriteLine($"Heater: On, newTemperature: {newTemperature}, temperature: {Temperature}, event_TemperatureArgs");
+            }
+            else
+            {
+                System.Console.WriteLine($"Heater: Off, newTemperature: {newTemperature}, temperature: {Temperature}, event_TemperatureArgs");
             }
         }
     }
@@ -53,6 +68,18 @@
             }
         }
 
+        public void OnTemperatureChanged(object? sender, TemperatureArgs e)
+        {
+            var newTemperature = e.NewTemperature;
+            if (newTemperature < Temperature)
+            {
+                System.Console.WriteLine($"Heater: On, newTemperature: {newTemperature}, temperature: {Temperature}, event_TemperatureArgs");
+            }
+            else
+            {
+                System.Console.WriteLine($"Heater: Off, newTemperature: {newTemperature}, temperature: {Temperature}, event_TemperatureArgs");
+            }
+        }
     }
 
     public class Thermostat
@@ -70,6 +97,13 @@
         // Define the event publisher
         public event EventHandler<TemperatureArgs> OnTemperatureChangeEvent =
             delegate { };
+
+        public EventHandler<TemperatureArgs> GetEventHandler()
+        {
+            return OnTemperatureChangeEvent;
+        }
+
+        public EventHandler<TemperatureArgs> EventHandler => OnTemperatureChangeEvent;
 
         // Using C# 3.0 or later syntax.
         // Define the event publisher (initially without the sender)
@@ -148,26 +182,43 @@
             //thermostat.OnTemperatureChange += cooler.OnTemperatureChanged;
             //thermostat.CurrentTemperature = int.Parse("195");
 
+            // 结论: += 也是不行的
             #endregion
 
             #region 如果我是用函数进行复制呢?
 
+            //thermostat.CurrentTemperature = int.Parse("194");
+
+            //Console.WriteLine("通过函数添加事件");
+            //AddEvent(thermostat.OnTemperatureChange, cooler);
+            //thermostat.CurrentTemperature = int.Parse("196");
+
+            //Console.WriteLine("对原始变量, 附加事件后调用");
+            //thermostat.OnTemperatureChange += cooler.OnTemperatureChanged;
+            //thermostat.CurrentTemperature = int.Parse("195");
+
+            // 结论: 使用函数进行附加事件, 也是没用的
+            #endregion
+
+            #region 使用事件会出问题嘛?
+
+            thermostat.OnTemperatureChangeEvent += heater.OnTemperatureChanged;
+            thermostat.OnTemperatureChangeEvent += cooler.OnTemperatureChanged;
+
+            // 缓冲一下现在的状态
+            var localOnChange = thermostat.GetEventHandler();
             thermostat.CurrentTemperature = int.Parse("194");
-
-            Console.WriteLine("通过函数添加事件");
-            AddEvent(thermostat.OnTemperatureChange, cooler);
-            thermostat.CurrentTemperature = int.Parse("196");
-
-            Console.WriteLine("对原始变量, 附加事件后调用");
-            thermostat.OnTemperatureChange += cooler.OnTemperatureChanged;
-            thermostat.CurrentTemperature = int.Parse("195");
-
+            // Console.WriteLine("解除临时变量后的委托后调用");
+            localOnChange -= heater.OnTemperatureChanged;
+            thermostat.CurrentTemperature = int.Parse("193");
+            // Console.WriteLine("解除原始变量后的委托后调用");
+            //thermostat.EventHandler -= heater.OnTemperatureChanged; // error
+            thermostat.CurrentTemperature = int.Parse("192");
+            
+            // 结论: 其实如果能正常把 event 对象给弄出来, 也是跟委托是一样的. 
             #endregion
         }
 
-        private static void AddEvent(Action<float> onTemperatureChange, Cooler cooler)
-        {
-            onTemperatureChange += cooler.OnTemperatureChanged;
-        }
+
     }
 }
