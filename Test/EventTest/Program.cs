@@ -84,7 +84,7 @@
                 {
                     _currentTemperature = value;
                     OnTemperatureChange?.Invoke(value);
-                    OnTemperatureChangeEvent(newTemperature);
+                    OnTemperatureChangeEvent(this, new(value));
                 }
             }
         }
