@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using ZRQ.Utils.Config;
-using ZRQ.Utils;
+﻿using System.Xml.Serialization;
 
-namespace ZRQ.Utils.ConfigTool
+namespace ZRQ.Utils.Config
 {
-    public class XMLConfigManage<T> : IXMLConfig<T>
+    public class XmlConfigManage<T> : IXmlConfig<T>
     {
-        public virtual string XMLFilePath { get; set; } = String.Empty;
+        public virtual string XmlFilePath { get; set; } = string.Empty;
 
         /// <summary>
         /// 加载xml对象
         /// </summary>
         /// <returns> </returns>
-        /// <remarks> 返回的xml取决于 <see cref="XMLFilePath" /> </remarks>
+        /// <remarks> 返回的xml取决于 <see cref="XmlFilePath" /> </remarks>
         public virtual T? Load()
         {
-            string filePath = XMLFilePath;
+            string filePath = XmlFilePath;
             return this.Load(filePath);
         }
 
@@ -44,25 +36,23 @@ namespace ZRQ.Utils.ConfigTool
                 obj = (T?)xmlSerializer.Deserialize(fs);
             }
             catch
-            { }
+            {
+                // ignored
+            }
             finally
             {
-                if (fs != null)
-                {
-                    fs.Close();
-                }
+                fs?.Close();
             }
             return obj;
         }
 
         /// <summary>
-        /// 保存xml对象在 <see cref="XMLFilePath" /> 文件中
+        /// 保存xml对象在 <see cref="XmlFilePath" /> 文件中
         /// </summary>
         /// <remarks> 保存本类 </remarks>
         public virtual void Save()
         {
-            string filePath = XMLFilePath;
-            Save(XMLFilePath, this);
+            Save(XmlFilePath, this);
         }
 
         /// <summary>

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ZRQ.Utils.Config
 {
-    public interface IXMLConfig<T>
+    public interface IXmlConfig<out T>
     {
         /// <summary>
         /// Xml文件路径
         /// </summary>
-        string XMLFilePath { get; set; }
+        string XmlFilePath { get; set; }
 
         T? Load();
 

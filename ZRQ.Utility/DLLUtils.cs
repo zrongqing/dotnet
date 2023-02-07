@@ -8,7 +8,7 @@ namespace ZRQ.Utils
     /// <summary>
     /// DLL的相关操作
     /// </summary>
-    public class DLLUtils
+    public class DllUtils
     {
         public static bool IsDllLoaded(string path)
         {

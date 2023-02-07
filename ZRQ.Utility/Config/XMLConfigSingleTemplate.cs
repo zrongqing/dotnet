@@ -6,24 +6,16 @@
  *
 *************************************************************************************/
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ZRQ.Utils.Config;
-
-namespace ZRQ.Utils.ConfigTool
+namespace ZRQ.Utils.Config
 {
     /// <summary>
     ///
-    /// </summary> <typeparam name="T"></typeparam>
+    /// </summary>
     /// <remarks>更改api的使用注意,文件默认采用utf-8格式保存,如果是其他文件格式可能出现打开失败,建议删除xml文件后重新创建</remarks> <example>
-    /// public class XMLConfigSingleTestClass : XMLConfigSingleTemplate<XMLConfigSingleTestClass> {
-    /// public override string XMLFilePath { get; set; } = @""; } </example>
-    public class XMLConfigSingleTemplate<T> : XMLConfigManage<T> where T : new()
+    /// </example>
+    public class XmlConfigSingleTemplate<T> : XmlConfigManage<T> where T : new()
     {
-        public override string XMLFilePath
+        public override string XmlFilePath
         {
             get
             {
@@ -32,41 +24,33 @@ namespace ZRQ.Utils.ConfigTool
             }
         }
 
-        #region Instance
+        #region Inst
 
         private static T? _instance;
-        private static object _locker = new object();
+        private static readonly object _locker = new();
 
-        public static T Instance
+        public static T Inst
         {
             get
             {
-                if (_instance == null)
+                if (_instance != null) return _instance;
+
+                lock (_locker)
                 {
-                    lock (_locker)
-                    {
-                        if (_instance == null)
-                        {
-                            T tempInst = new T();
-                            IXMLConfig<T> iXMLConfig = (IXMLConfig<T>)tempInst;
-                            string filePath = iXMLConfig.XMLFilePath;
-                            _instance = iXMLConfig.Load();
-                            if (_instance == null)
-                            {
-                                _instance = new T();
-                            }
-                        }
-                    }
+                    if (_instance != null) return _instance;
+
+                    T tempInst = new();
+                    IXmlConfig<T> iXmlConfig = (IXmlConfig<T>)tempInst;
+                    string filePath = iXmlConfig.XmlFilePath;
+
+                    _instance = iXmlConfig.Load() ?? new T();
                 }
                 return _instance;
             }
-            set
-            {
-                _instance = value;
-            }
+            set => _instance = value;
         }
 
-        #endregion Instance
+        #endregion Inst
 
         /// <summary>
         /// 单例类不支持指定路径加载
@@ -75,6 +59,7 @@ namespace ZRQ.Utils.ConfigTool
         /// <returns> </returns>
         public new T Load(string filePath)
         {
+            if (filePath == null) throw new ArgumentNullException(nameof(filePath));
             throw new NotSupportedException("单例类不支持指定路径加载");
         }
     }
