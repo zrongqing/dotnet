@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using ZRQ.Utils.ClassTemplate;
 
 namespace ZRQ.Utils.Config;
 
@@ -12,8 +11,8 @@ public static class JsonConfigStatic
     {
         JsonSerializerOptions options = new()
         {
-            WriteIndented = true,                   // 测试对齐
-            PropertyNameCaseInsensitive = true,     // 不区分大小写的属性名称
+            WriteIndented = true, // 测试对齐
+            PropertyNameCaseInsensitive = true // 不区分大小写的属性名称
         };
         return options;
     }
@@ -21,10 +20,10 @@ public static class JsonConfigStatic
 
 public class JsonConfig<T> where T : JsonConfig<T>, new()
 {
+    private static T? _inst;
+
     [JsonIgnore]
     protected virtual string JsonFile { get; set; } = Path.Combine(Environment.CurrentDirectory, $"{nameof(T)}.json");
-
-    private static T? _inst;
 
     public static T Inst
     {
@@ -45,13 +44,10 @@ public class JsonConfig<T> where T : JsonConfig<T>, new()
             var jsonFile = inst.JsonFile;
             if (!File.Exists(jsonFile)) return;
 
-            string jsonString = File.ReadAllText(jsonFile);
+            var jsonString = File.ReadAllText(jsonFile);
 
-            T? deserialize = JsonSerializer.Deserialize<T>(jsonString);
-            if (deserialize != null)
-            {
-                inst = deserialize;
-            }
+            var deserialize = JsonSerializer.Deserialize<T>(jsonString);
+            if (deserialize != null) inst = deserialize;
         }
         catch (Exception)
         {
@@ -64,14 +60,14 @@ public class JsonConfig<T> where T : JsonConfig<T>, new()
         var options = JsonConfigStatic.Options;
         //byte[] jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(this);
 
-        string jsonString = JsonSerializer.Serialize(Inst, options);
+        var jsonString = JsonSerializer.Serialize(Inst, options);
         File.WriteAllText(JsonFile, jsonString);
     }
 
     public async Task SaveAsync()
     {
         var options = JsonConfigStatic.Options;
-        await using FileStream createStream = File.Create(JsonFile);
+        await using var createStream = File.Create(JsonFile);
         {
             //byte[] jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(this);
             await JsonSerializer.SerializeAsync(createStream, this, options);
@@ -79,4 +75,3 @@ public class JsonConfig<T> where T : JsonConfig<T>, new()
         }
     }
 }
-
