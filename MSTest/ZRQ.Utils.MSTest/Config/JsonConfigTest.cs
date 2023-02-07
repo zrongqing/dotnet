@@ -19,7 +19,7 @@ namespace ZRQ.Utils.MSTest.Config
         public void TestMethod1()
         {
             JsonData jsonData = new();
-            jsonData.SaveAsync().Start();
+            jsonData.Save();
         }
     }
 }

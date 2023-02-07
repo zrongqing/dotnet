@@ -19,17 +19,52 @@ public static class JsonConfigStatic
     }
 }
 
-public class JsonConfig<T>
+public class JsonConfig<T> where T : JsonConfig<T>, new()
 {
     [JsonIgnore]
     protected virtual string JsonFile { get; set; } = Path.Combine(Environment.CurrentDirectory, $"{nameof(T)}.json");
 
+    private static T? _inst;
+
+    public static T Inst
+    {
+        get
+        {
+            if (_inst != null) return _inst;
+
+            _inst = new T();
+            LoadConfig(_inst);
+            return _inst;
+        }
+    }
+
+    private static void LoadConfig(T inst)
+    {
+        try
+        {
+            var jsonFile = inst.JsonFile;
+            if (!File.Exists(jsonFile)) return;
+
+            string jsonString = File.ReadAllText(jsonFile);
+
+            T? deserialize = JsonSerializer.Deserialize<T>(jsonString);
+            if (deserialize != null)
+            {
+                inst = deserialize;
+            }
+        }
+        catch (Exception)
+        {
+            // ignored
+        }
+    }
+
     public void Save()
     {
         var options = JsonConfigStatic.Options;
-        byte[] jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(this);
+        //byte[] jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(this);
 
-        string jsonString = JsonSerializer.Serialize(jsonUtf8Bytes, options);
+        string jsonString = JsonSerializer.Serialize(Inst, options);
         File.WriteAllText(JsonFile, jsonString);
     }
 
@@ -38,8 +73,8 @@ public class JsonConfig<T>
         var options = JsonConfigStatic.Options;
         await using FileStream createStream = File.Create(JsonFile);
         {
-            byte[] jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(this);
-            await JsonSerializer.SerializeAsync(createStream, jsonUtf8Bytes, options);
+            //byte[] jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(this);
+            await JsonSerializer.SerializeAsync(createStream, this, options);
             await createStream.DisposeAsync();
         }
     }
