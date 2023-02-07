@@ -19,11 +19,7 @@ namespace ZRQ.Utils.ClassTemplate
 
         public static T Instance()
         {
-            if (null == _instance)
-            {
-                _instance = new T();
-            }
-            return _instance;
+            return _instance ??= new T();
         }
 
         public static void Reset()
@@ -34,7 +30,10 @@ namespace ZRQ.Utils.ClassTemplate
             }
         }
 
-        public void Dispose() => DisposeImp();
+        public void Dispose()
+        {
+            DisposeImp();
+        }
 
         protected virtual void DisposeImp()
         {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ZRQ.Utils;
+﻿namespace ZRQ.Utils;
 
 public static class LineCounter
 {
@@ -13,39 +7,32 @@ public static class LineCounter
     // Use the first argument as the directory to search, or default to the current directory
     private static void HowUsing(string[] args)
     {
-        int totalLineCount = 0;
+        var totalLineCount = 0;
         string directory;
         if (args.Length > 0)
-        {
             directory = args[0];
-        }
         else
-        {
             directory = Directory.GetCurrentDirectory();
-        }
         totalLineCount = DirectoryCountLines(directory);
-        System.Console.WriteLine(totalLineCount);
+        Console.WriteLine(totalLineCount);
     }
 
     #endregion How to using
 
     private static int CountLines(string file)
     {
-        int lineCount = 0;
+        var lineCount = 0;
         string? line;
         FileStream stream = new(file, FileMode.Open);
         StreamReader reader = new(stream);
         line = reader.ReadLine();
         while (line is object)
         {
-            if (line.Trim() != "")
-            {
-                lineCount++;
-            }
+            if (line.Trim() != "") lineCount++;
             line = reader.ReadLine();
         }
 
-        reader.Dispose();  // Automatically closes the stream
+        reader.Dispose(); // Automatically closes the stream
         return lineCount;
     }
 
@@ -63,18 +50,14 @@ public static class LineCounter
     private static int DirectoryCountLines(
         string directory, string extension)
     {
-        int lineCount = 0;
-        foreach (string file in
-            Directory.GetFiles(directory, extension))
-        {
+        var lineCount = 0;
+        foreach (var file in
+                 Directory.GetFiles(directory, extension))
             lineCount += CountLines(file);
-        }
 
-        foreach (string subdirectory in
-            Directory.GetDirectories(directory))
-        {
+        foreach (var subdirectory in
+                 Directory.GetDirectories(directory))
             lineCount += DirectoryCountLines(subdirectory);
-        }
 
         return lineCount;
     }
