@@ -51,8 +51,9 @@ public class JsonConfig<T> where T : JsonConfig<T>, new()
             }
 
             var jsonString = File.ReadAllText(jsonFile);
+            var options = JsonConfigStatic.Options;
 
-            T? deserialize = JsonSerializer.Deserialize<T>(jsonString);
+            T? deserialize = JsonSerializer.Deserialize<T>(jsonString, options);
             if (deserialize == null) return;
 
             instance = deserialize;
