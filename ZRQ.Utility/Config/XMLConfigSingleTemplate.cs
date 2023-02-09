@@ -24,7 +24,7 @@ namespace ZRQ.Utils.Config
             }
         }
 
-        #region Inst
+        #region Ins
 
         private static T? _instance;
         private static readonly object _locker = new();
@@ -50,7 +50,7 @@ namespace ZRQ.Utils.Config
             set => _instance = value;
         }
 
-        #endregion Inst
+        #endregion Ins
 
         /// <summary>
         /// 单例类不支持指定路径加载

@@ -20,34 +20,36 @@ public static class JsonConfigStatic
 
 public class JsonConfig<T> where T : JsonConfig<T>, new()
 {
-    private static T? _inst;
+    private static T? _ins;
 
     [JsonIgnore]
-    protected virtual string JsonFile { get; set; } = Path.Combine(Environment.CurrentDirectory, $"{nameof(T)}.json");
+    protected virtual string JsonFile { get; set; } = Path.Combine(Environment.CurrentDirectory, $"{typeof(T).ToString()}.json");
 
-    public static T Inst
+    public static T Ins
     {
         get
         {
-            if (_inst != null) return _inst;
+            if (_ins != null) return _ins;
 
-            _inst = new T();
-            LoadConfig(_inst);
-            return _inst;
+            _ins = new T();
+            LoadConfig(ref _ins);
+            return _ins;
         }
     }
 
-    private static void LoadConfig(T inst)
+    private static void LoadConfig(ref T instance)
     {
         try
         {
-            var jsonFile = inst.JsonFile;
+            var jsonFile = instance.JsonFile;
             if (!File.Exists(jsonFile)) return;
 
             var jsonString = File.ReadAllText(jsonFile);
 
-            var deserialize = JsonSerializer.Deserialize<T>(jsonString);
-            if (deserialize != null) inst = deserialize;
+            T? deserialize = JsonSerializer.Deserialize<T>(jsonString);
+            if(deserialize == null) return;
+
+            instance = deserialize;
         }
         catch (Exception)
         {
@@ -60,7 +62,7 @@ public class JsonConfig<T> where T : JsonConfig<T>, new()
         var options = JsonConfigStatic.Options;
         //byte[] jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(this);
 
-        var jsonString = JsonSerializer.Serialize(Inst, options);
+        var jsonString = JsonSerializer.Serialize(Ins, options);
         File.WriteAllText(JsonFile, jsonString);
     }
 
