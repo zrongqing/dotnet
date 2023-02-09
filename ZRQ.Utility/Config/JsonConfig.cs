@@ -23,7 +23,7 @@ public class JsonConfig<T> where T : JsonConfig<T>, new()
     private static T? _ins;
 
     [JsonIgnore]
-    protected virtual string JsonFile { get; set; } = Path.Combine(Environment.CurrentDirectory, $"{typeof(T).Name}.json");
+    protected virtual string JsonFile { get; set; } = Path.Combine(Environment.CurrentDirectory, "config", $"{typeof(T).Name}.json");
 
     public static T Ins
     {
@@ -42,12 +42,18 @@ public class JsonConfig<T> where T : JsonConfig<T>, new()
         try
         {
             var jsonFile = instance.JsonFile;
-            if (!File.Exists(jsonFile)) return;
+            if (!File.Exists(jsonFile))
+            {
+                // 创建一个config
+                FileUtils.CreateFile(jsonFile);
+                _ = instance.SaveAsync();
+                return;
+            }
 
             var jsonString = File.ReadAllText(jsonFile);
 
             T? deserialize = JsonSerializer.Deserialize<T>(jsonString);
-            if(deserialize == null) return;
+            if (deserialize == null) return;
 
             instance = deserialize;
         }
