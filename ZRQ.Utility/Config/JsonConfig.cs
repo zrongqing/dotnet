@@ -23,7 +23,7 @@ public class JsonConfig<T> where T : JsonConfig<T>, new()
     private static T? _ins;
 
     [JsonIgnore]
-    protected virtual string JsonFile { get; set; } = Path.Combine(Environment.CurrentDirectory, $"{typeof(T).ToString()}.json");
+    protected virtual string JsonFile { get; set; } = Path.Combine(Environment.CurrentDirectory, $"{typeof(T).Name}.json");
 
     public static T Ins
     {
