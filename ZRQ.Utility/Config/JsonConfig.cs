@@ -11,7 +11,6 @@ public static class JsonConfigStatic
     {
         JsonSerializerOptions options = new()
         {
-            WriteIndented = true, // 测试对齐
             PropertyNameCaseInsensitive = true // 不区分大小写的属性名称
         };
         return options;
