@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Text.Encodings.Web;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace ZRQ.Utils.Config;
@@ -11,6 +12,8 @@ public static class JsonConfigStatic
     {
         JsonSerializerOptions options = new()
         {
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            WriteIndented = true, // 对齐写入
             PropertyNameCaseInsensitive = true // 不区分大小写的属性名称
         };
         return options;
