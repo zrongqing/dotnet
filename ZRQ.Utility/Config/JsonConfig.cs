@@ -25,6 +25,8 @@ public class JsonConfig<T> where T : JsonConfig<T>, new()
     [JsonIgnore]
     protected virtual string JsonFile { get; set; } = Path.Combine(Environment.CurrentDirectory, "config", $"{typeof(T).Name}.json");
 
+    public string DefaultDir { get; } = Path.Combine(Environment.CurrentDirectory, "config");
+
     public static T Ins
     {
         get
