@@ -8,4 +8,8 @@
     <Configurations>Debug;Release;Release_pdb</Configurations>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_pdb|AnyCPU'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
 </Project>
