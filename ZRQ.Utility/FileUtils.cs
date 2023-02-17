@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ZRQ.Utils;
 
-internal class FileUtils
+public class FileUtils
 {
     /// <summary>
     /// 复制文件夹的递归
@@ -81,5 +81,12 @@ internal class FileUtils
         catch (Exception)
         {
         }
+    }
+
+    public static void OpenFolderAndSelectFile(String fileFullName)
+    {
+        System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo("Explorer.exe");
+        psi.Arguments = "/e,/select," + fileFullName;
+        System.Diagnostics.Process.Start(psi);
     }
 }

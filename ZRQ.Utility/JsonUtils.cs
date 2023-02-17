@@ -36,5 +36,14 @@ namespace ZRQ.Utils
             var jsonString = JsonSerializer.Serialize(jsonObject, Options);
             File.WriteAllText(filePath, jsonString);
         }
+
+        public static T? Deserialize<T>(string jsonFile)
+        {
+            var jsonString = File.ReadAllText(jsonFile);
+            var options = JsonUtils.Options;
+
+            T? deserialize = JsonSerializer.Deserialize<T>(jsonString, options);
+            return deserialize;
+        }
     }
 }
