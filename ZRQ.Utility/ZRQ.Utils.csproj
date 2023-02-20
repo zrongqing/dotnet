@@ -5,10 +5,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
-    <Configurations>Debug;Release;Release_pdb</Configurations>
+    <Configurations>Debug;Release;Release_nopdb;</Configurations>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_pdb|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_nopdb|AnyCPU'">
     <DebugType>none</DebugType>
   </PropertyGroup>
 
