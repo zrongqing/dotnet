@@ -22,4 +22,12 @@ public static class PathUtils
     {
         return Environment.CurrentDirectory;
     }
+
+    /// <summary>
+    /// C:\Users\UserName\AppData\Local
+    /// </summary>
+    public static string GetLocalApplicationData()
+    {
+        return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+    }
 }
