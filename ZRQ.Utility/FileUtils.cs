@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Pipes;
-using System.Linq;
-using System.Text;
+﻿using System.Diagnostics;
 
 namespace ZRQ.Utils;
 
@@ -17,46 +12,38 @@ public static class FileUtils
     /// <param name="overwrite"> </param>
     /// <param name="arrExtenion"> 指定复制的文件后缀 </param>
     /// <returns> 返回提示信息，成功，返回"" </returns>
-    public static string CopyFun(string sourceFolderName, string destFolderName, bool overwrite = false, string[]? arrExtenion = null)
+    public static string CopyFun(string sourceFolderName, string destFolderName, bool overwrite = false,
+        string[]? arrExtenion = null)
     {
         try
         {
             var listdir = Directory.GetDirectories(sourceFolderName);
             if (listdir != null && listdir.Length > 0)
-            {
                 foreach (var item in listdir)
                 {
                     var forlders = item.Split('\\');
                     var lastDirectory = forlders[forlders.Length - 1];
                     var dest = Path.Combine(destFolderName, lastDirectory);
-                    if (!Directory.Exists(dest))
-                    {
-                        Directory.CreateDirectory(dest);
-                    }
+                    if (!Directory.Exists(dest)) Directory.CreateDirectory(dest);
 
                     CopyFun(item, dest, overwrite, arrExtenion);
                 }
-            }
 
             var list = Directory.GetFiles(sourceFolderName);
             if (list != null && list.Length > 0)
-            {
                 foreach (var item in list)
                 {
-                    string strExtenion = Path.GetExtension(item).ToLower();
-                    if (arrExtenion != null && !arrExtenion.Contains(strExtenion))
-                    {
-                        continue;
-                    }
+                    var strExtenion = Path.GetExtension(item).ToLower();
+                    if (arrExtenion != null && !arrExtenion.Contains(strExtenion)) continue;
                     var sourceFileName = Path.GetFileName(item);
                     File.Copy(item, Path.Combine(destFolderName, sourceFileName), overwrite);
                 }
-            }
         }
         catch (Exception ex)
         {
             return ex.Message;
         }
+
         return "";
     }
 
@@ -67,13 +54,10 @@ public static class FileUtils
     /// <returns> 根据filePath的位置 自动创建文件夹以及文件 </returns>
     public static void CreateFile(string filePath)
     {
-        string? dirPath = Path.GetDirectoryName(filePath);
+        var dirPath = Path.GetDirectoryName(filePath);
         if (null == dirPath) return;
 
-        if (!Directory.Exists(dirPath))
-        {
-            Directory.CreateDirectory(dirPath);
-        }
+        if (!Directory.Exists(dirPath)) Directory.CreateDirectory(dirPath);
 
         using var fileStream = File.Create(filePath);
         fileStream.Close();
@@ -81,18 +65,36 @@ public static class FileUtils
 
     public static bool CreateDir(string dirPath)
     {
-        if (!Directory.Exists(dirPath))
-        {
-            Directory.CreateDirectory(dirPath);
-        }
+        if (!Directory.Exists(dirPath)) Directory.CreateDirectory(dirPath);
 
         return true;
     }
 
-    public static void OpenFolderAndSelectFile(String fileFullName)
+    public static void OpenFolderAndSelectFile(string fileFullName)
     {
-        System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo("Explorer.exe");
+        var psi = new ProcessStartInfo("Explorer.exe");
         psi.Arguments = "/e,/select," + fileFullName;
-        System.Diagnostics.Process.Start(psi);
+        Process.Start(psi);
+    }
+
+    /// <summary>
+    /// 得到文件夹下的所有文件(包括字文件夹)
+    /// </summary>
+    public static string[] GetFilesRecursively(string path)
+    {
+        // 获取当前目录下的所有文件
+        string[] files = Directory.GetFiles(path);
+
+        // 获取当前目录下的所有子目录
+        string[] directories = Directory.GetDirectories(path);
+
+        // 遍历所有子目录，并递归调用自己获取子目录中的文件
+        foreach (string directory in directories)
+        {
+            string[] subFiles = GetFilesRecursively(directory);
+            files = files.Concat(subFiles).ToArray();
+        }
+
+        return files;
     }
 }
