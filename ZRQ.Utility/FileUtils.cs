@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Pipes;
 using System.Linq;
 using System.Text;
 
 namespace ZRQ.Utils;
 
-public class FileUtils
+public static class FileUtils
 {
     /// <summary>
     /// 复制文件夹的递归
@@ -66,21 +67,26 @@ public class FileUtils
     /// <returns> 根据filePath的位置 自动创建文件夹以及文件 </returns>
     public static void CreateFile(string filePath)
     {
-        string? dicPath = Path.GetDirectoryName(filePath);
-        if (null == dicPath) return;
+        string? dirPath = Path.GetDirectoryName(filePath);
+        if (null == dirPath) return;
 
-        try
+        if (!Directory.Exists(dirPath))
         {
-            if (!Directory.Exists(dicPath))
-            {
-                Directory.CreateDirectory(dicPath);
-            }
-            var fileStream = File.Create(filePath);
-            fileStream.Close();
+            Directory.CreateDirectory(dirPath);
         }
-        catch (Exception)
+
+        using var fileStream = File.Create(filePath);
+        fileStream.Close();
+    }
+
+    public static bool CreateDir(string dirPath)
+    {
+        if (!Directory.Exists(dirPath))
         {
+            Directory.CreateDirectory(dirPath);
         }
+
+        return true;
     }
 
     public static void OpenFolderAndSelectFile(String fileFullName)
