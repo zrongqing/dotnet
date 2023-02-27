@@ -1,9 +1,34 @@
 ﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace ZRQ.Utils;
 
 public static class FileUtils
 {
+    #region kernel32
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+    private static extern uint GetFileAttributes(string lpFileName);
+
+    /// <summary>
+    /// 判断文件是否是系统文件或者是只读文件
+    /// </summary>
+    public static bool IsSystemOrReadOnlyFile(string filePath)
+    {
+        uint fileAttributes = GetFileAttributes(filePath);
+
+        if ((fileAttributes != uint.MaxValue) && ((fileAttributes & 0x02) == 0x02 || (fileAttributes & 0x01) == 0x01))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    #endregion
+
     /// <summary>
     /// 复制文件夹的递归
     /// </summary>
@@ -83,15 +108,15 @@ public static class FileUtils
     public static string[] GetFilesRecursively(string path)
     {
         // 获取当前目录下的所有文件
-        string[] files = Directory.GetFiles(path);
+        var files = Directory.GetFiles(path);
 
         // 获取当前目录下的所有子目录
-        string[] directories = Directory.GetDirectories(path);
+        var directories = Directory.GetDirectories(path);
 
         // 遍历所有子目录，并递归调用自己获取子目录中的文件
-        foreach (string directory in directories)
+        foreach (var directory in directories)
         {
-            string[] subFiles = GetFilesRecursively(directory);
+            var subFiles = GetFilesRecursively(directory);
             files = files.Concat(subFiles).ToArray();
         }
 
