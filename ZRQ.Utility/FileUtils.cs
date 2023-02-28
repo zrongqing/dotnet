@@ -1,34 +1,14 @@
-﻿using System.Diagnostics;
+﻿#region
+
+using System.Diagnostics;
 using System.Runtime.InteropServices;
+
+#endregion
 
 namespace ZRQ.Utils;
 
 public static class FileUtils
 {
-    #region kernel32
-
-    [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-    private static extern uint GetFileAttributes(string lpFileName);
-
-    /// <summary>
-    /// 判断文件是否是系统文件或者是只读文件
-    /// </summary>
-    public static bool IsSystemOrReadOnlyFile(string filePath)
-    {
-        uint fileAttributes = GetFileAttributes(filePath);
-
-        if ((fileAttributes != uint.MaxValue) && ((fileAttributes & 0x02) == 0x02 || (fileAttributes & 0x01) == 0x01))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    #endregion
-
     /// <summary>
     /// 复制文件夹的递归
     /// </summary>
@@ -122,4 +102,57 @@ public static class FileUtils
 
         return files;
     }
+
+    /// <summary>
+    /// 判断文件是否被占用
+    /// </summary>
+    public static bool IsFileOccupied(string fileName)
+    {
+        var vHandle = CreateFile(fileName, GENERIC_READ | GENERIC_WRITE,
+            0, IntPtr.Zero, OPEN_EXISTING,
+            0, IntPtr.Zero);
+        if (vHandle == new IntPtr(INVALID_HANDLE_VALUE))
+        {
+            var errorCode = Marshal.GetLastWin32Error();
+            if (errorCode == ERROR_SHARING_VIOLATION)
+                return true; // 文件被占用
+            return false; // 文件不存在或其他原因
+        }
+
+        CloseHandle(vHandle);
+        return false; // 文件没有被占用
+    }
+
+    #region kernel32
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+    private static extern uint GetFileAttributes(string lpFileName);
+
+    /// <summary>
+    /// 判断文件是否是系统文件或者是只读文件
+    /// </summary>
+    public static bool IsSystemOrReadOnlyFile(string filePath)
+    {
+        var fileAttributes = GetFileAttributes(filePath);
+
+        if (fileAttributes != uint.MaxValue && ((fileAttributes & 0x02) == 0x02 || (fileAttributes & 0x01) == 0x01))
+            return true;
+        return false;
+    }
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern IntPtr CreateFile(string lpFileName, uint dwDesiredAccess,
+        uint dwShareMode, IntPtr lpSecurityAttributes, uint dwCreationDisposition,
+        uint dwFlagsAndAttributes, IntPtr hTemplateFile);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool CloseHandle(IntPtr hObject);
+
+    private const uint GENERIC_READ = 0x80000000;
+    private const uint GENERIC_WRITE = 0x40000000;
+    private const uint OPEN_EXISTING = 3;
+    private const int INVALID_HANDLE_VALUE = -1;
+    private const int ERROR_SHARING_VIOLATION = 32;
+
+    #endregion
 }
