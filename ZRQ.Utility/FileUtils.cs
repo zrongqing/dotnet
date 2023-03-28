@@ -24,25 +24,36 @@ public static class FileUtils
         {
             var listdir = Directory.GetDirectories(sourceFolderName);
             if (listdir != null && listdir.Length > 0)
+            {
                 foreach (var item in listdir)
                 {
                     var forlders = item.Split('\\');
                     var lastDirectory = forlders[forlders.Length - 1];
                     var dest = Path.Combine(destFolderName, lastDirectory);
-                    if (!Directory.Exists(dest)) Directory.CreateDirectory(dest);
+                    if (!Directory.Exists(dest))
+                    {
+                        Directory.CreateDirectory(dest);
+                    }
 
                     CopyFun(item, dest, overwrite, arrExtenion);
                 }
+            }
 
             var list = Directory.GetFiles(sourceFolderName);
             if (list != null && list.Length > 0)
+            {
                 foreach (var item in list)
                 {
                     var strExtenion = Path.GetExtension(item).ToLower();
-                    if (arrExtenion != null && !arrExtenion.Contains(strExtenion)) continue;
+                    if (arrExtenion != null && !arrExtenion.Contains(strExtenion))
+                    {
+                        continue;
+                    }
+
                     var sourceFileName = Path.GetFileName(item);
                     File.Copy(item, Path.Combine(destFolderName, sourceFileName), overwrite);
                 }
+            }
         }
         catch (Exception ex)
         {
@@ -60,25 +71,43 @@ public static class FileUtils
     public static void CreateFile(string filePath)
     {
         var dirPath = Path.GetDirectoryName(filePath);
-        if (null == dirPath) return;
+        if (null == dirPath)
+        {
+            return;
+        }
 
-        if (!Directory.Exists(dirPath)) Directory.CreateDirectory(dirPath);
+        if (!Directory.Exists(dirPath))
+        {
+            Directory.CreateDirectory(dirPath);
+        }
 
         using var fileStream = File.Create(filePath);
         fileStream.Close();
     }
 
+    /// <summary>
+    /// 如果路径不存在就创建目录
+    /// </summary>
     public static bool CreateDir(string dirPath)
     {
-        if (!Directory.Exists(dirPath)) Directory.CreateDirectory(dirPath);
+        if (!Directory.Exists(dirPath))
+        {
+            Directory.CreateDirectory(dirPath);
+        }
 
         return true;
     }
 
+    /// <summary>
+    /// 打开文件选择器
+    /// </summary>
+    /// <param name="fileFullName"></param>
     public static void OpenFolderAndSelectFile(string fileFullName)
     {
-        var psi = new ProcessStartInfo("Explorer.exe");
-        psi.Arguments = "/e,/select," + fileFullName;
+        var psi = new ProcessStartInfo("Explorer.exe")
+        {
+            Arguments = "/e,/select," + fileFullName,
+        };
         Process.Start(psi);
     }
 
@@ -108,25 +137,72 @@ public static class FileUtils
     /// </summary>
     public static bool IsFileOccupied(string fileName)
     {
-        var vHandle = CreateFile(fileName, GENERIC_READ | GENERIC_WRITE,
-            0, IntPtr.Zero, OPEN_EXISTING,
-            0, IntPtr.Zero);
+        var vHandle = CreateFile(fileName,
+            GENERIC_READ | GENERIC_WRITE,
+            0,
+            IntPtr.Zero,
+            OPEN_EXISTING,
+            0,
+            IntPtr.Zero);
         if (vHandle == new IntPtr(INVALID_HANDLE_VALUE))
         {
             var errorCode = Marshal.GetLastWin32Error();
             if (errorCode == ERROR_SHARING_VIOLATION)
+            {
                 return true; // 文件被占用
+            }
+
             return false; // 文件不存在或其他原因
         }
 
         CloseHandle(vHandle);
         return false; // 文件没有被占用
     }
+    
+    /// <summary>
+    /// 判断文件是否正在被使用
+    /// </summary>
+    public static bool IsFileInUse(string fileName)
+    {
+        IntPtr handle = CreateFile(fileName, 0x80000000, 0, IntPtr.Zero, 3, 0x80, IntPtr.Zero);
+        if (handle.ToInt32() == -1)
+            return true;
+
+        BY_HANDLE_FILE_INFORMATION bhfi = new BY_HANDLE_FILE_INFORMATION();
+        GetFileInformationByHandle(handle, out bhfi);
+        CloseHandle(handle);
+
+        return false;
+    }
 
     #region kernel32
+    [StructLayout(LayoutKind.Sequential)]
+    public struct FILETIME
+    {
+        public uint dwLowDateTime;
+        public uint dwHighDateTime;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct BY_HANDLE_FILE_INFORMATION
+    {
+        public uint dwFileAttributes;
+        public FILETIME ftCreationTime;
+        public FILETIME ftLastAccessTime;
+        public FILETIME ftLastWriteTime;
+        public uint dwVolumeSerialNumber;
+        public uint nFileSizeHigh;
+        public uint nFileSizeLow;
+        public uint nNumberOfLinks;
+        public uint nFileIndexHigh;
+        public uint nFileIndexLow;
+    }
 
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
     private static extern uint GetFileAttributes(string lpFileName);
+
+    [DllImport("kernel32.dll")]
+    public static extern bool GetFileInformationByHandle(IntPtr hFile, out BY_HANDLE_FILE_INFORMATION lpFileInformation);
 
     /// <summary>
     /// 判断文件是否是系统文件或者是只读文件
@@ -136,7 +212,10 @@ public static class FileUtils
         var fileAttributes = GetFileAttributes(filePath);
 
         if (fileAttributes != uint.MaxValue && ((fileAttributes & 0x02) == 0x02 || (fileAttributes & 0x01) == 0x01))
+        {
             return true;
+        }
+
         return false;
     }
 
