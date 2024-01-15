@@ -5,8 +5,6 @@ ZRQ.Utility：
 
 一些通用功能的绘制
 
-
-
 ## 一些准备研究的东西
 
 ### Json序列化
@@ -18,3 +16,15 @@ ZRQ.Utility：
 ### XML序列化
 
 XML序列化在多态的应用
+
+## Test
+
+### AttributeTest
+
+是想解决以下情况而测试的内容：  
+
+我有很多解析器，每种解析器可以解析不同的文件格式。  
+我想将不同的文件格式，绑定到不同的解析器上，  
+不想通过switch来进行判断，避免在每次增加新的解析器的时候，都会修改switch 
+
+[AttributeTest](Test/AttributeTest/README.MD)
