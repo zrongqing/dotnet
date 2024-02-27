@@ -69,12 +69,12 @@ public class MyTaskThree : IMyTask
 
 }
 
-class TestAuthorAttribute
+internal static class TestAuthorAttribute
 {
     /// <summary>
     /// 获取继承了执行接口的全部类型
     /// </summary>
-    public static IEnumerable<Type> GetInterfaceTypes()
+    private static IEnumerable<Type> GetInterfaceTypes()
     {
         // 获取当前程序集中实现了IMyInterface接口的所有类型
         Type interfaceType = typeof(IMyTask);
