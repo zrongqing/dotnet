@@ -16,6 +16,6 @@ Console.WriteLine("Hello, World!");
 //    throw;
 //}
 
-JsonData.Inst.Save();
+JsonData.Ins.Save();
 
 Console.ReadKey();
