@@ -28,3 +28,7 @@ XML序列化在多态的应用
 不想通过switch来进行判断，避免在每次增加新的解析器的时候，都会修改switch 
 
 [AttributeTest](Test/AttributeTest/README.MD)
+
+### ForTest
+
+测试 For Foreach 的性能测试
