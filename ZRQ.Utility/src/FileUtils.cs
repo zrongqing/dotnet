@@ -15,10 +15,10 @@ public static class FileUtils
     /// <param name="sourceFolderName"> </param>
     /// <param name="destFolderName"> </param>
     /// <param name="overwrite"> </param>
-    /// <param name="arrExtenion"> 指定复制的文件后缀 </param>
+    /// <param name="arrExtension"> 指定复制的文件后缀 </param>
     /// <returns> 返回提示信息，成功，返回"" </returns>
-    public static string CopyFun(string sourceFolderName, string destFolderName, bool overwrite = false,
-        string[]? arrExtenion = null)
+    public static string CopyFolder(string sourceFolderName, string destFolderName, bool overwrite = false,
+        string[]? arrExtension = null)
     {
         try
         {
@@ -35,7 +35,7 @@ public static class FileUtils
                         Directory.CreateDirectory(dest);
                     }
 
-                    CopyFun(item, dest, overwrite, arrExtenion);
+                    CopyFolder(item, dest, overwrite, arrExtension);
                 }
             }
 
@@ -45,7 +45,7 @@ public static class FileUtils
                 foreach (var item in list)
                 {
                     var strExtenion = Path.GetExtension(item).ToLower();
-                    if (arrExtenion != null && !arrExtenion.Contains(strExtenion))
+                    if (arrExtension != null && !arrExtension.Contains(strExtenion))
                     {
                         continue;
                     }

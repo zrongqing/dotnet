@@ -10,7 +10,12 @@ namespace ZRQ.Utils
     /// </summary>
     public class DllUtils
     {
-        public static bool IsDllLoaded(string path)
+        /// <summary>
+        /// 通过Win32 来判断是否已经加载了DLL
+        /// </summary>
+        /// <param name="path">DLL路径</param>
+        /// <returns></returns>
+        public static bool IsLoadedByWin32(string path)
         {
             return GetModuleHandle(path) != IntPtr.Zero;
         }
