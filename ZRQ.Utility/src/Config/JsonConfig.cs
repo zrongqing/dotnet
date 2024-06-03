@@ -3,12 +3,15 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace ZRQ.Utils.Config;
-
-public static class JsonConfigStatic
+static class JsonConfigStatic
 {
-    public static readonly JsonSerializerOptions Options = GetJsonSerializerOptions();
+    public static JsonSerializerOptions Options { get; } = GetJsonSerializerOptions();
 
-    public static JsonSerializerOptions GetJsonSerializerOptions()
+    /// <summary>
+    /// 默认的Json序列化设置
+    /// </summary>
+    /// <returns></returns>
+    private static JsonSerializerOptions GetJsonSerializerOptions()
     {
         JsonSerializerOptions options = new()
         {

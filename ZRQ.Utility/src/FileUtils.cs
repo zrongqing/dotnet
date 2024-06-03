@@ -1,4 +1,4 @@
-﻿#region
+#region
 
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -10,57 +10,47 @@ namespace ZRQ.Utils;
 public static class FileUtils
 {
     /// <summary>
-    /// 复制文件夹的递归
+    /// 复制文件夹
     /// </summary>
-    /// <param name="sourceFolderName"> </param>
-    /// <param name="destFolderName"> </param>
-    /// <param name="overwrite"> </param>
-    /// <param name="arrExtension"> 指定复制的文件后缀 </param>
-    /// <returns> 返回提示信息，成功，返回"" </returns>
-    public static string CopyFolder(string sourceFolderName, string destFolderName, bool overwrite = false,
-        string[]? arrExtension = null)
+    /// <param name="sourceDir">原始文件夹</param>
+    /// <param name="destDir">目标文件夹</param>
+    /// <exception cref="DirectoryNotFoundException"></exception>
+    public static void CopyDirectory(string sourceDir, string destDir)
     {
-        try
+        // Get the subdirectories for the specified directory.
+        var dir = new DirectoryInfo(sourceDir);
+
+        if (!dir.Exists)
+            throw new DirectoryNotFoundException("Source directory does not exist or could not be found: " + sourceDir);
+
+        var dirs = dir.GetDirectories();
+        // If the destination directory doesn't exist, create it.
+        if (!Directory.Exists(destDir)) Directory.CreateDirectory(destDir);
+
+        // Get the files in the directory and copy them to the new location.
+        var files = dir.GetFiles();
+        foreach (var file in files)
         {
-            var listdir = Directory.GetDirectories(sourceFolderName);
-            if (listdir != null && listdir.Length > 0)
-            {
-                foreach (var item in listdir)
-                {
-                    var forlders = item.Split('\\');
-                    var lastDirectory = forlders[forlders.Length - 1];
-                    var dest = Path.Combine(destFolderName, lastDirectory);
-                    if (!Directory.Exists(dest))
-                    {
-                        Directory.CreateDirectory(dest);
-                    }
-
-                    CopyFolder(item, dest, overwrite, arrExtension);
-                }
-            }
-
-            var list = Directory.GetFiles(sourceFolderName);
-            if (list != null && list.Length > 0)
-            {
-                foreach (var item in list)
-                {
-                    var strExtenion = Path.GetExtension(item).ToLower();
-                    if (arrExtension != null && !arrExtension.Contains(strExtenion))
-                    {
-                        continue;
-                    }
-
-                    var sourceFileName = Path.GetFileName(item);
-                    File.Copy(item, Path.Combine(destFolderName, sourceFileName), overwrite);
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            return ex.Message;
+            var tempPath = Path.Combine(destDir, file.Name);
+            file.CopyTo(tempPath, false);
         }
 
-        return "";
+        // Recursively copy subdirectories.
+        foreach (var subDir in dirs)
+        {
+            var tempPath = Path.Combine(destDir, subDir.Name);
+            CopyDirectory(subDir.FullName, tempPath);
+        }
+    }
+
+    /// <summary>
+    /// 如果路径不存在就创建目录
+    /// </summary>
+    public static bool CreateDir(string dirPath)
+    {
+        if (!Directory.Exists(dirPath)) Directory.CreateDirectory(dirPath);
+
+        return true;
     }
 
     /// <summary>
@@ -71,44 +61,12 @@ public static class FileUtils
     public static void CreateFile(string filePath)
     {
         var dirPath = Path.GetDirectoryName(filePath);
-        if (null == dirPath)
-        {
-            return;
-        }
+        if (null == dirPath) return;
 
-        if (!Directory.Exists(dirPath))
-        {
-            Directory.CreateDirectory(dirPath);
-        }
+        if (!Directory.Exists(dirPath)) Directory.CreateDirectory(dirPath);
 
         using var fileStream = File.Create(filePath);
         fileStream.Close();
-    }
-
-    /// <summary>
-    /// 如果路径不存在就创建目录
-    /// </summary>
-    public static bool CreateDir(string dirPath)
-    {
-        if (!Directory.Exists(dirPath))
-        {
-            Directory.CreateDirectory(dirPath);
-        }
-
-        return true;
-    }
-
-    /// <summary>
-    /// 打开文件选择器
-    /// </summary>
-    /// <param name="fileFullName"></param>
-    public static void OpenFolderAndSelectFile(string fileFullName)
-    {
-        var psi = new ProcessStartInfo("Explorer.exe")
-        {
-            Arguments = "/e,/select," + fileFullName,
-        };
-        Process.Start(psi);
     }
 
     /// <summary>
@@ -133,6 +91,22 @@ public static class FileUtils
     }
 
     /// <summary>
+    /// 判断文件是否正在被使用
+    /// </summary>
+    public static bool IsFileInUse(string fileName)
+    {
+        var handle = CreateFile(fileName, 0x80000000, 0, IntPtr.Zero, 3, 0x80, IntPtr.Zero);
+        if (handle.ToInt32() == -1)
+            return true;
+
+        var bhfi = new BY_HANDLE_FILE_INFORMATION();
+        GetFileInformationByHandle(handle, out bhfi);
+        CloseHandle(handle);
+
+        return false;
+    }
+
+    /// <summary>
     /// 判断文件是否被占用
     /// </summary>
     public static bool IsFileOccupied(string fileName)
@@ -147,10 +121,7 @@ public static class FileUtils
         if (vHandle == new IntPtr(INVALID_HANDLE_VALUE))
         {
             var errorCode = Marshal.GetLastWin32Error();
-            if (errorCode == ERROR_SHARING_VIOLATION)
-            {
-                return true; // 文件被占用
-            }
+            if (errorCode == ERROR_SHARING_VIOLATION) return true; // 文件被占用
 
             return false; // 文件不存在或其他原因
         }
@@ -158,24 +129,63 @@ public static class FileUtils
         CloseHandle(vHandle);
         return false; // 文件没有被占用
     }
-    
+
     /// <summary>
-    /// 判断文件是否正在被使用
+    /// 打开文件选择器
     /// </summary>
-    public static bool IsFileInUse(string fileName)
+    /// <param name="fileFullName"></param>
+    public static void OpenFolderAndSelectFile(string fileFullName)
     {
-        IntPtr handle = CreateFile(fileName, 0x80000000, 0, IntPtr.Zero, 3, 0x80, IntPtr.Zero);
-        if (handle.ToInt32() == -1)
-            return true;
+        var psi = new ProcessStartInfo("Explorer.exe")
+        {
+            Arguments = "/e,/select," + fileFullName
+        };
+        Process.Start(psi);
+    }
 
-        BY_HANDLE_FILE_INFORMATION bhfi = new BY_HANDLE_FILE_INFORMATION();
-        GetFileInformationByHandle(handle, out bhfi);
-        CloseHandle(handle);
+    /// <summary>
+    /// 复制文件夹(递归)
+    /// </summary>
+    /// <param name="sourceFolderName">原文件夹路径</param>
+    /// <param name="destFolderName">目标文件夹路径</param>
+    /// <param name="overwrite">是否覆盖</param>
+    /// <param name="arrExtension"> 指定复制的文件后缀 </param>
+    /// <returns> 返回提示信息，成功，返回"" </returns>
+    private static bool CopyFolder(string sourceFolderName, string destFolderName, bool overwrite = false, string[]? arrExtension = null)
+    {
+        // 先复制当前文件夹中的文件
+        var list = Directory.GetFiles(sourceFolderName);
+        if (list.Length > 0)
+            foreach (var item in list)
+            {
+                var strExtenion = Path.GetExtension(item).ToLower();
+                if (arrExtension != null && !arrExtension.Contains(strExtenion)) continue;
 
-        return false;
+                var sourceFileName = Path.GetFileName(item);
+                File.Copy(item, Path.Combine(destFolderName, sourceFileName), overwrite);
+            }
+
+
+        var listDir = Directory.GetDirectories(sourceFolderName);
+        if (listDir.Length == 0) return true;
+
+
+        foreach (var item in listDir)
+        {
+            var forlders = item.Split('\\');
+            var lastDirectory = forlders[forlders.Length - 1];
+            var dest = Path.Combine(destFolderName, lastDirectory);
+            if (!Directory.Exists(dest)) Directory.CreateDirectory(dest);
+
+            CopyFolder(item, dest, overwrite, arrExtension);
+        }
+
+
+        return true;
     }
 
     #region kernel32
+
     [StructLayout(LayoutKind.Sequential)]
     public struct FILETIME
     {
@@ -211,10 +221,7 @@ public static class FileUtils
     {
         var fileAttributes = GetFileAttributes(filePath);
 
-        if (fileAttributes != uint.MaxValue && ((fileAttributes & 0x02) == 0x02 || (fileAttributes & 0x01) == 0x01))
-        {
-            return true;
-        }
+        if (fileAttributes != uint.MaxValue && ((fileAttributes & 0x02) == 0x02 || (fileAttributes & 0x01) == 0x01)) return true;
 
         return false;
     }

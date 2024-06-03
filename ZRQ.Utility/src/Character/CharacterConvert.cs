@@ -4,6 +4,9 @@ using System.Text;
 
 namespace ZRQ.Utils.Character
 {
+    /// <summary>
+    /// 字符转换
+    /// </summary>
     public class CharacterConvert
     {
         /// <summary>
@@ -11,7 +14,7 @@ namespace ZRQ.Utils.Character
         /// </summary>
         /// <param name="text"> 转换的中文字符串 </param>
         /// <returns> </returns>
-        public static string ConvertToEn(string text)
+        public static string EnToCh(string text)
         {
             const string ch = "。；，？！、“”‘’（）—";//中文字符
             const string en = @".;,?!\""""''()-";//英文字符

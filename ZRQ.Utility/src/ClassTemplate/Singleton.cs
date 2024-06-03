@@ -5,7 +5,7 @@ using System.Text;
 namespace ZRQ.Utils.ClassTemplate
 {
     /// <summary>
-    /// 单例
+    /// 单例模板
     /// </summary>
     /// <typeparam name="T"> </typeparam>
     public class Singleton<T> : IDisposable where T : class, new()
