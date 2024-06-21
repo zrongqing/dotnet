@@ -5,6 +5,11 @@ VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCoreBasics", "EFCoreBasics\EFCoreBasics.csproj", "{659FE874-37C2-40D9-9981-0013C1C9A8C6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{5099ADED-AD33-42DF-AB3A-3F2AE7B51AD8}"
+	ProjectSection(SolutionItems) = preProject
+		..\READEME.MD = ..\READEME.MD
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
