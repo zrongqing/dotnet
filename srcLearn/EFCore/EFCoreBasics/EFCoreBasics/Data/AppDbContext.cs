@@ -13,7 +13,7 @@ internal class AppDbContext : DbContext
     public AppDbContext()
     {
         // 数据库连接
-        ConnectionString = "Data Source=DESKTOP-C6B113V;Initial Catalog=EmployeeMngt_EFCorePractice;IntegratedSecurity=True";
+        ConnectionString = AppDbConfig.SqlServerDefault;
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

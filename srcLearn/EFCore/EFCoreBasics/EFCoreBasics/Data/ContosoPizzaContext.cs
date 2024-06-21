@@ -1,9 +1,11 @@
 ﻿
 using EFCoreBasics.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace EFCoreBasics.Data;
 
+[DbContext(typeof(ContosoPizzaContext))]
 public class ContosoPizzaContext : DbContext
 {
     public DbSet<Customer> Customers { get; set; } = null!;
@@ -16,3 +18,4 @@ public class ContosoPizzaContext : DbContext
         optionsBuilder.UseSqlServer(AppDbConfig.SqlServerDefault);
     }
 }
+    

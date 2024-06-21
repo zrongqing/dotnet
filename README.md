@@ -10,12 +10,24 @@
 
 https://www.youtube.com/watch?v=FNJpXWPka30&list=PLdHN14J7CHtaNHnAPOk_yEq0GidtbTizl
 
+## 迁移，更新
+
+初始化数据库：
+dotnet ef migrations add InitialCreate
+
+
+
+
 ## 属性关键字
 
 - Required：使用null, 但是null不存储在数据库中
 - string?: 允许EFCore知道某列是允许为null的
 
 ## ISSUE
+
+### Add-Migration InitialCreate 迁移命令失败？
+
+Visual Studio 中包管理调用失败，使用dotnet
 
 ### 链接失败
 

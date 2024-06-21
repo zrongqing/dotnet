@@ -15,8 +15,8 @@ namespace EFCoreBasics.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
-            optionsBuilder.UseSqlServer(@"Server = localhost; Database = BloggingDB; Trusted_Connection=True;TrustServerCertificate=True;");
+
+            optionsBuilder.UseSqlServer(AppDbConfig.SqlServerDefault);
             //optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=BloggingDB;Trusted_Connection=True;");
         }
     }
