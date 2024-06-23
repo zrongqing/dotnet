@@ -1,13 +1,39 @@
-# EFCore
+ï»¿# EFCore
 
-## ÏîÄ¿Çé¿öËµÃ÷
+## é¡¹ç›®æƒ…å†µè¯´æ˜
 
 ### EFCoreBasics
 
-[EFCore»ù±¾½Ì³Ì-youtube](https://www.youtube.com/watch?v=MkswRgChbEU&list=PLdHN14J7CHtaNHnAPOk_yEq0GidtbTizl
+[EFCoreåŸºæœ¬æ•™ç¨‹-youtube](https://www.youtube.com/watch?v=MkswRgChbEU&list=PLdHN14J7CHtaNHnAPOk_yEq0GidtbTizl
 )  
 
-- ÕıÏòÊı¾İ¿â¹¤³Ì£¬Í¨¹ı´úÂëÊµÏÖ´´½¨±í£¬ÊµÏÖ»ù´¡µÄÔöÉ¾²é¸Ä¡£
+- æ­£å‘æ•°æ®åº“å·¥ç¨‹ï¼Œé€šè¿‡ä»£ç å®ç°åˆ›å»ºè¡¨ï¼Œå®ç°åŸºç¡€çš„å¢åˆ æŸ¥æ”¹ã€‚
+
+
+## Issues
+
+### è¡¨æ–°å¢å­—æ®µçš„æ–¹æ³•
+
+- æ›´æ–° Entity ç±»
+---
+- dotnet CLIï¼š dotnet ef migrations add AddDescriptionToMyEntity  
+**OR**
+- Add-Migration Add-Migration AddDescriptionToMyEntity    
+ç”Ÿæˆè¿ç§»æ–‡ä»¶
+---
+- æ£€æŸ¥è¿ç§»æ–‡ä»¶
+---
+- dotnet CLIï¼šdotnet ef database update  
+**OR**
+- PowerShellï¼šUpdate-Database  
+æ›´æ–°æ•°æ®åº“
+---
+- é€šè¿‡ä»£ç æ›´æ–°å­—æ®µ  
+
+```CShaper
+context.Database.Migrate();  // Apply pending migrations automatically
+```
+
 
 
 

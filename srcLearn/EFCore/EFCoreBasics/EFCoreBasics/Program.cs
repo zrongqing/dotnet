@@ -1,5 +1,6 @@
 ﻿using EFCoreBasics.Data;
 using EFCoreBasics.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCoreBasics;
 
@@ -7,6 +8,23 @@ internal class Program
 {
     private static void Main(string[] args)
     {
+        // 新增加字段调用
+        //using (var context = new ContosoPizzaContext())
+        //{
+        //    context.Database.Migrate();  // Apply pending migrations automatically
+
+        //    var customer = new Customer()
+        //    {
+        //        FirstName = "Zhang",
+        //        LastName = "RongQing",
+        //        Address = "ChongQing",
+        //        Phone = "中国电信",
+        //        Email = "wyzrq163@163.com"
+        //    };
+        //    context.Customers.Add(customer);
+        //    context.SaveChanges();
+        //}
+
         // 增加
         using (var context = new ContosoPizzaContext())
         {
@@ -14,7 +32,7 @@ internal class Program
             {
                 Name = "Veggie Special Pizza",
                 Price = 9.99M,
-                Description = string.Empty
+                Description = string.Empty,
             };
             context.Products.Add(veggieSpecial);
 
