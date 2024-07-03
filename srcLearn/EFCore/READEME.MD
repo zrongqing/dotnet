@@ -1,5 +1,10 @@
 ﻿# EFCore
 
+## 基本命令
+
+- [（dotnet CLI）or （Add-Migration）](#表新增字段的方法)：初始化数据库
+- Update-Database: 更新数据库；SQLite可以直接生成一个数据库
+
 ## 项目情况说明
 
 ### EFCoreBasics
@@ -16,6 +21,12 @@
 反向EFCore，从已经建立好的数据库，反向建立EFCore类
 
 ## Issues
+
+### 实现延迟加载
+
+[延迟加载](https://www.youtube.com/watch?v=jgESld7U5Bw/start=120)
+
+
 
 ### 实现反向EFCore
 
