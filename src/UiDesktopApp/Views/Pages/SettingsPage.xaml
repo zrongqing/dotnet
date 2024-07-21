@@ -25,7 +25,9 @@
             FontSize="20"
             FontWeight="Medium"
             Text="Personalization" />
-        <TextBlock Margin="0,12,0,0" Text="Theme" />
+        <TextBlock
+            Margin="0,12,0,0"
+            Text="Theme" />
         <RadioButton
             Margin="0,12,0,0"
             Command="{Binding ViewModel.ChangeThemeCommand, Mode=OneWay}"
@@ -46,6 +48,8 @@
             FontSize="20"
             FontWeight="Medium"
             Text="About UiDesktopApp" />
-        <TextBlock Margin="0,12,0,0" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
+        <TextBlock
+            Margin="0,12,0,0"
+            Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
     </StackPanel>
 </Page>
