@@ -2,31 +2,23 @@
 
 ## 基本命令
 
-- [（dotnet CLI）or （Add-Migration）](#表新增字段的方法)：初始化数据库
+### 程序包管理器控制台
+
+- Add-Migration [描述] ：会生成Migrations文件，并再下面生成预生成数据库的代码
 - Update-Database: 更新数据库；SQLite可以直接生成一个数据库
 
-## 项目情况说明
+## 相关链接
 
-### EFCoreBasics
-
-[EFCore基本教程-youtube](https://www.youtube.com/watch?v=MkswRgChbEU&list=PLdHN14J7CHtaNHnAPOk_yEq0GidtbTizl
+- [EFCore基本教程-youtube](https://www.youtube.com/watch?v=MkswRgChbEU&list=PLdHN14J7CHtaNHnAPOk_yEq0GidtbTizl
 )  
-
-- 正向数据库工程，通过代码实现创建表，实现基础的增删查改。
-
-### ContosoPizza
-
 [Working with an Existing Database [2 of 5] | Entity Framework Core for Beginners](https://www.youtube.com/watch?v=DCYVfLT5_QI)
 
-反向EFCore，从已经建立好的数据库，反向建立EFCore类
 
 ## Issues
 
 ### 实现延迟加载
 
 [延迟加载](https://www.youtube.com/watch?v=jgESld7U5Bw/start=120)
-
-
 
 ### 实现反向EFCore
 
