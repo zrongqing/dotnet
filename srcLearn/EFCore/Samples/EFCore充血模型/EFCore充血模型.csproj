@@ -15,4 +15,15 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
+<<<<<<< HEAD
+=======
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
+>>>>>>> origin/EFCore
 </Project>
