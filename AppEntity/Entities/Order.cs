@@ -1,16 +1,24 @@
-﻿namespace AppDataBasis;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-internal class Order
+namespace AppEntity;
+
+public class Order:BaseEntity
 {
-    public long Id { get; set; }
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public Guid OrderId { get; set; }
+    
     /// <summary>
     /// 商品名
     /// </summary>
     public string Name { get; set; }
+    
     /// <summary>
     /// 收货地址
     /// </summary>
     public string Address { get; set; }
+    
     /// <summary>
     /// 快递信息
     /// </summary>

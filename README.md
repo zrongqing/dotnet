@@ -2,7 +2,19 @@
 
 希望自己能在dotnet的路上持续不断地学习
 
-# Entity Framework Core
+## Entity Framework 6
+
+- [ ] 使用ef6.exe
+- [ ] 创建表
+- [ ] 对现有数据库的反向工程
+
+### VisualStudio2022程序包管理器
+
+
+
+
+
+## Entity Framework Core
 
 前置条件：
 - SQL Server 基础知识 [链接](https://www.youtube.com/watch?v=8vTCyhDyRjg&list=PL82C6-O4XrHfZoh2ZH7-HCPyh9oHeYPnz) 

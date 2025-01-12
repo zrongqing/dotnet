@@ -19,4 +19,8 @@
     <Folder Include="Config\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\AppEntity\AppEntity.csproj" />
+  </ItemGroup>
+
 </Project>
