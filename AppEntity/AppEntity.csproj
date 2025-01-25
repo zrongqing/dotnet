@@ -1,18 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
+        <TargetFramework>net48</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>latest</LangVersion>
+        <UserSecretsId>b165773b-d7d9-4281-bd11-fa3fba0280a2</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="EntityFramework" Version="6.5.1" />
+      <PackageReference Include="Microsoft.Configuration.ConfigurationBuilders.UserSecrets" Version="2.0.0" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Configuration\" />
       <Folder Include="Interface\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="System.Security" />
     </ItemGroup>
 
 </Project>

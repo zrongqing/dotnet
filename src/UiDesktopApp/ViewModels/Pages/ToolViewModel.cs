@@ -30,7 +30,10 @@ namespace UiDesktopApp.ViewModels.Pages
 
         }
 
-        public void OnNavigatedFrom() { }
+        public void OnNavigatedFrom()
+        {
+            
+        }
 
         [RelayCommand]
         private void OnChangeCharsToEn()
