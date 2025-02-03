@@ -1,14 +1,12 @@
-﻿namespace UiDesktopApp.ViewModels.Pages
-{
-    public partial class DashboardViewModel : ObservableObject
-    {
-        [ObservableProperty]
-        private int _counter = 0;
+﻿namespace UiDesktopApp.ViewModels.Pages;
 
-        [RelayCommand]
-        private void OnCounterIncrement()
-        {
-            Counter++;
-        }
+public partial class DashboardViewModel : ObservableObject
+{
+    [ObservableProperty] private int _counter;
+
+    [RelayCommand]
+    private void OnCounterIncrement()
+    {
+        Counter++;
     }
 }

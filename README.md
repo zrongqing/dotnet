@@ -10,14 +10,11 @@
 
 ### VisualStudio2022程序包管理器
 
-
-
-
-
 ## Entity Framework Core
 
 前置条件：
-- SQL Server 基础知识 [链接](https://www.youtube.com/watch?v=8vTCyhDyRjg&list=PL82C6-O4XrHfZoh2ZH7-HCPyh9oHeYPnz) 
+
+- SQL Server 基础知识 [链接](https://www.youtube.com/watch?v=8vTCyhDyRjg&list=PL82C6-O4XrHfZoh2ZH7-HCPyh9oHeYPnz)
 - （@"Server = localhost; Database = BloggingDB; Trusted_Connection=True;TrustServerCertificate=True;"）
 
 https://www.youtube.com/watch?v=FNJpXWPka30&list=PLdHN14J7CHtaNHnAPOk_yEq0GidtbTizl
@@ -26,9 +23,6 @@ https://www.youtube.com/watch?v=FNJpXWPka30&list=PLdHN14J7CHtaNHnAPOk_yEq0GidtbT
 
 初始化数据库：
 dotnet ef migrations add InitialCreate
-
-
-
 
 ## 属性关键字
 

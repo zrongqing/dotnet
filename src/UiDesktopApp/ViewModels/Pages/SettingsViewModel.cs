@@ -1,63 +1,67 @@
-﻿using Wpf.Ui.Appearance;
-using Wpf.Ui.Controls;
+﻿using System.Reflection;
+using Wpf.Ui.Abstractions.Controls;
+using Wpf.Ui.Appearance;
 
-namespace UiDesktopApp.ViewModels.Pages
+namespace UiDesktopApp.ViewModels.Pages;
+
+public partial class SettingsViewModel : ObservableObject, INavigationAware
 {
-    public partial class SettingsViewModel : ObservableObject, INavigationAware
+    [ObservableProperty] private string _appVersion = string.Empty;
+
+    [ObservableProperty] private ApplicationTheme _currentTheme = ApplicationTheme.Unknown;
+
+    private bool _isInitialized;
+
+    public Task OnNavigatedToAsync()
     {
-        private bool _isInitialized = false;
+        if (!_isInitialized)
+            InitializeViewModel();
+        
+        return Task.CompletedTask;
+    }
 
-        [ObservableProperty]
-        private string _appVersion = String.Empty;
+    public Task OnNavigatedFromAsync()
+    {
+        return Task.CompletedTask;
+    }
 
-        [ObservableProperty]
-        private ApplicationTheme _currentTheme = ApplicationTheme.Unknown;
 
-        public void OnNavigatedTo()
+    private void InitializeViewModel()
+    {
+        CurrentTheme = ApplicationThemeManager.GetAppTheme();
+        AppVersion = $"UiDesktopApp1 - {GetAssemblyVersion()}";
+
+        _isInitialized = true;
+    }
+
+    private string GetAssemblyVersion()
+    {
+        return Assembly.GetExecutingAssembly().GetName().Version?.ToString()
+               ?? string.Empty;
+    }
+
+    [RelayCommand]
+    private void OnChangeTheme(string parameter)
+    {
+        switch (parameter)
         {
-            if (!_isInitialized)
-                InitializeViewModel();
-        }
-
-        public void OnNavigatedFrom() { }
-
-        private void InitializeViewModel()
-        {
-            CurrentTheme = ApplicationThemeManager.GetAppTheme();
-            AppVersion = $"UiDesktopApp1 - {GetAssemblyVersion()}";
-
-            _isInitialized = true;
-        }
-
-        private string GetAssemblyVersion()
-        {
-            return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
-                ?? String.Empty;
-        }
-
-        [RelayCommand]
-        private void OnChangeTheme(string parameter)
-        {
-            switch (parameter)
-            {
-                case "theme_light":
-                    if (CurrentTheme == ApplicationTheme.Light)
-                        break;
-
-                    ApplicationThemeManager.Apply(ApplicationTheme.Light);
-                    CurrentTheme = ApplicationTheme.Light;
-
+            case "theme_light":
+                if (CurrentTheme == ApplicationTheme.Light)
                     break;
 
-                default:
-                    if (CurrentTheme == ApplicationTheme.Dark)
-                        break;
+                ApplicationThemeManager.Apply(ApplicationTheme.Light);
+                CurrentTheme = ApplicationTheme.Light;
 
-                    ApplicationThemeManager.Apply(ApplicationTheme.Dark);
-                    CurrentTheme = ApplicationTheme.Dark;
+                break;
 
+            default:
+                if (CurrentTheme == ApplicationTheme.Dark)
                     break;
-            }
+
+                ApplicationThemeManager.Apply(ApplicationTheme.Dark);
+                CurrentTheme = ApplicationTheme.Dark;
+
+                break;
         }
     }
 }

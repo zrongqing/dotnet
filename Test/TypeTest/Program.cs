@@ -1,30 +1,29 @@
-﻿namespace TypeTest
+﻿namespace TypeTest;
+
+internal class Program
 {
-    internal class Program
+    public static List<Type> ElementTypes = new()
     {
-        public static List<Type> ElementTypes = new()
-        {
-            typeof(HostObjAttributes),
-            typeof(InsertableObject),
-        };
+        typeof(HostObjAttributes),
+        typeof(InsertableObject)
+    };
 
-        private static void Main(string[] args)
-        {
-            Console.WriteLine("Hello, World!");
+    private static void Main(string[] args)
+    {
+        Console.WriteLine("Hello, World!");
 
-            PipeType pipeType = new();
+        PipeType pipeType = new();
 
-            TTT(pipeType);
-        }
+        TTT(pipeType);
+    }
 
-        private static void TTT(ElementType pipeType)
-        {
-            Type type = pipeType.GetType();
+    private static void TTT(ElementType pipeType)
+    {
+        var type = pipeType.GetType();
 
-            Type parentType = ElementTypes[0];
-            var isSub = type.IsSubclassOf(parentType);
+        var parentType = ElementTypes[0];
+        var isSub = type.IsSubclassOf(parentType);
 
-            var isMepCurveType = typeof(MEPCurveType).IsSubclassOf(type);
-        }
+        var isMepCurveType = typeof(MEPCurveType).IsSubclassOf(type);
     }
 }

@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace JsonTest;
 
-namespace JsonTest
+public class WeatherForecastDerived : WeatherForecast
 {
-    public class WeatherForecastDerived : WeatherForecast
-    {
-        public int WindSpeed { get; set; }
-    }
+    public int WindSpeed { get; set; }
 }

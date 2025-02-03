@@ -12,9 +12,9 @@ public static class FileUtils
     /// <summary>
     /// 复制文件夹
     /// </summary>
-    /// <param name="sourceDir">原始文件夹</param>
-    /// <param name="destDir">目标文件夹</param>
-    /// <exception cref="DirectoryNotFoundException"></exception>
+    /// <param name="sourceDir"> 原始文件夹 </param>
+    /// <param name="destDir"> 目标文件夹 </param>
+    /// <exception cref="DirectoryNotFoundException"> </exception>
     public static void CopyDirectory(string sourceDir, string destDir)
     {
         // Get the subdirectories for the specified directory.
@@ -133,7 +133,7 @@ public static class FileUtils
     /// <summary>
     /// 打开文件选择器
     /// </summary>
-    /// <param name="fileFullName"></param>
+    /// <param name="fileFullName"> </param>
     public static void OpenFolderAndSelectFile(string fileFullName)
     {
         var psi = new ProcessStartInfo("Explorer.exe")
@@ -146,12 +146,13 @@ public static class FileUtils
     /// <summary>
     /// 复制文件夹(递归)
     /// </summary>
-    /// <param name="sourceFolderName">原文件夹路径</param>
-    /// <param name="destFolderName">目标文件夹路径</param>
-    /// <param name="overwrite">是否覆盖</param>
+    /// <param name="sourceFolderName"> 原文件夹路径 </param>
+    /// <param name="destFolderName"> 目标文件夹路径 </param>
+    /// <param name="overwrite"> 是否覆盖 </param>
     /// <param name="arrExtension"> 指定复制的文件后缀 </param>
     /// <returns> 返回提示信息，成功，返回"" </returns>
-    private static bool CopyFolder(string sourceFolderName, string destFolderName, bool overwrite = false, string[]? arrExtension = null)
+    private static bool CopyFolder(string sourceFolderName, string destFolderName, bool overwrite = false,
+        string[]? arrExtension = null)
     {
         // 先复制当前文件夹中的文件
         var list = Directory.GetFiles(sourceFolderName);
@@ -212,7 +213,8 @@ public static class FileUtils
     private static extern uint GetFileAttributes(string lpFileName);
 
     [DllImport("kernel32.dll")]
-    public static extern bool GetFileInformationByHandle(IntPtr hFile, out BY_HANDLE_FILE_INFORMATION lpFileInformation);
+    public static extern bool
+        GetFileInformationByHandle(IntPtr hFile, out BY_HANDLE_FILE_INFORMATION lpFileInformation);
 
     /// <summary>
     /// 判断文件是否是系统文件或者是只读文件
@@ -221,7 +223,8 @@ public static class FileUtils
     {
         var fileAttributes = GetFileAttributes(filePath);
 
-        if (fileAttributes != uint.MaxValue && ((fileAttributes & 0x02) == 0x02 || (fileAttributes & 0x01) == 0x01)) return true;
+        if (fileAttributes != uint.MaxValue &&
+            ((fileAttributes & 0x02) == 0x02 || (fileAttributes & 0x01) == 0x01)) return true;
 
         return false;
     }

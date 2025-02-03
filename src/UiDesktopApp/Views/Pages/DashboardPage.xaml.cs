@@ -1,18 +1,18 @@
-﻿using UiDesktopApp.ViewModels.Pages;
-using Wpf.Ui.Controls;
+﻿using UiDesktopApp.Services;
+using UiDesktopApp.ViewModels.Pages;
+using Wpf.Ui.Abstractions.Controls;
 
-namespace UiDesktopApp.Views.Pages
+namespace UiDesktopApp.Views.Pages;
+
+public partial class DashboardPage : INavigableView<DashboardViewModel>
 {
-    public partial class DashboardPage : INavigableView<DashboardViewModel>
+    public DashboardPage(DashboardViewModel viewModel)
     {
-        public DashboardViewModel ViewModel { get; }
+        ViewModel = viewModel;
+        DataContext = this;
 
-        public DashboardPage(DashboardViewModel viewModel)
-        {
-            ViewModel = viewModel;
-            DataContext = this;
-
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
+
+    public DashboardViewModel ViewModel { get; }
 }

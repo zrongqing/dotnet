@@ -1,18 +1,17 @@
 ﻿using UiDesktopApp.ViewModels.Pages;
-using Wpf.Ui.Controls;
+using Wpf.Ui.Abstractions.Controls;
 
-namespace UiDesktopApp.Views.Pages
+namespace UiDesktopApp.Views.Pages;
+
+public partial class DataPage : INavigableView<DataViewModel>
 {
-    public partial class DataPage : INavigableView<DataViewModel>
+    public DataPage(DataViewModel viewModel)
     {
-        public DataViewModel ViewModel { get; }
+        ViewModel = viewModel;
+        DataContext = this;
 
-        public DataPage(DataViewModel viewModel)
-        {
-            ViewModel = viewModel;
-            DataContext = this;
-
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
+
+    public DataViewModel ViewModel { get; }
 }

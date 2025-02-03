@@ -23,5 +23,5 @@ public enum ShellMessageType
     /// <summary>
     /// 注意
     /// </summary>
-    NOTICE,
+    NOTICE
 }

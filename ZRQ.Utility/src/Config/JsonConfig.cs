@@ -3,14 +3,15 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace ZRQ.Utils.Config;
-static class JsonConfigStatic
+
+internal static class JsonConfigStatic
 {
     public static JsonSerializerOptions Options { get; } = GetJsonSerializerOptions();
 
     /// <summary>
     /// 默认的Json序列化设置
     /// </summary>
-    /// <returns></returns>
+    /// <returns> </returns>
     private static JsonSerializerOptions GetJsonSerializerOptions()
     {
         JsonSerializerOptions options = new()
@@ -28,7 +29,8 @@ public class JsonConfig<T> where T : JsonConfig<T>, new()
     private static T? _ins;
 
     [JsonIgnore]
-    protected virtual string JsonFile { get; set; } = Path.Combine(Environment.CurrentDirectory, "config", $"{typeof(T).Name}.json");
+    protected virtual string JsonFile { get; set; } =
+        Path.Combine(Environment.CurrentDirectory, "config", $"{typeof(T).Name}.json");
 
     public static T Ins
     {
@@ -58,7 +60,7 @@ public class JsonConfig<T> where T : JsonConfig<T>, new()
             var jsonString = File.ReadAllText(jsonFile);
             var options = JsonConfigStatic.Options;
 
-            T? deserialize = JsonSerializer.Deserialize<T>(jsonString, options);
+            var deserialize = JsonSerializer.Deserialize<T>(jsonString, options);
             if (deserialize == null) return;
 
             instance = deserialize;

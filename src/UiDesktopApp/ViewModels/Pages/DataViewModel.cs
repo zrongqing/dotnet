@@ -1,47 +1,50 @@
 ﻿using System.Windows.Media;
 using UiDesktopApp.Models;
-using Wpf.Ui.Controls;
+using Wpf.Ui.Abstractions.Controls;
 
-namespace UiDesktopApp.ViewModels.Pages
+namespace UiDesktopApp.ViewModels.Pages;
+
+public partial class DataViewModel : ObservableObject, INavigationAware
 {
-    public partial class DataViewModel : ObservableObject, INavigationAware
+    [ObservableProperty] private IEnumerable<DataColor> _colors;
+
+    private bool _isInitialized;
+
+    public Task OnNavigatedToAsync()
     {
-        private bool _isInitialized = false;
+        if (!_isInitialized)
+            InitializeViewModel();
+        
+        return Task.CompletedTask;
+    }
 
-        [ObservableProperty]
-        private IEnumerable<DataColor> _colors;
+    public Task OnNavigatedFromAsync()
+    {
+        return Task.CompletedTask;
+    }
+    
+    private void InitializeViewModel()
+    {
+        var random = new Random();
+        var colorCollection = new List<DataColor>();
 
-        public void OnNavigatedTo()
-        {
-            if (!_isInitialized)
-                InitializeViewModel();
-        }
-
-        public void OnNavigatedFrom() { }
-
-        private void InitializeViewModel()
-        {
-            var random = new Random();
-            var colorCollection = new List<DataColor>();
-
-            for (int i = 0; i < 8192; i++)
-                colorCollection.Add(
-                    new DataColor
-                    {
-                        Color = new SolidColorBrush(
-                            Color.FromArgb(
-                                (byte)200,
-                                (byte)random.Next(0, 250),
-                                (byte)random.Next(0, 250),
-                                (byte)random.Next(0, 250)
-                            )
+        for (var i = 0; i < 8192; i++)
+            colorCollection.Add(
+                new DataColor
+                {
+                    Color = new SolidColorBrush(
+                        Color.FromArgb(
+                            200,
+                            (byte)random.Next(0, 250),
+                            (byte)random.Next(0, 250),
+                            (byte)random.Next(0, 250)
                         )
-                    }
-                );
+                    )
+                }
+            );
 
-            Colors = colorCollection;
+        Colors = colorCollection;
 
-            _isInitialized = true;
-        }
+        _isInitialized = true;
     }
 }

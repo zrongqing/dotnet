@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
+using App.UI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,7 +11,7 @@ using UiDesktopApp.ViewModels.Windows;
 using UiDesktopApp.Views.Pages;
 using UiDesktopApp.Views.Windows;
 using Wpf.Ui;
-using Wpf.Ui.Controls;
+using Wpf.Ui.Abstractions;
 
 namespace UiDesktopApp;
 
@@ -26,64 +27,86 @@ public partial class App
     // https://docs.microsoft.com/dotnet/core/extensions/logging
     private static readonly IHost _host = Host
         .CreateDefaultBuilder()
-        .ConfigureAppConfiguration(c => { c.SetBasePath(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)); })
+        .ConfigureAppConfiguration(
+            c => { c.SetBasePath(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)); })
         .ConfigureServices((context, services) =>
         {
             services.AddHostedService<ApplicationHostService>();
 
-            // Page resolver service
-            services.AddSingleton<IPageService, PageService>();
-
-            // Theme manipulation
-            services.AddSingleton<IThemeService, ThemeService>();
-
-            // TaskBar manipulation
-            services.AddSingleton<ITaskBarService, TaskBarService>();
-
-            // Service containing navigation, same as INavigationWindow... but without window
-            services.AddSingleton<INavigationService, NavigationService>();
+            WpfUIServers(services);
 
             // Main window with navigation
-            services.AddSingleton<INavigationWindow, MainWindow>();
-            services.AddSingleton<MainWindowViewModel>();
+            AppViews(services);
 
-            services.AddSingleton<DashboardPage>();
-            services.AddSingleton<DashboardViewModel>();
 
-            services.AddSingleton<DataPage>();
-            services.AddSingleton<DataViewModel>();
-
-            services.AddSingleton<SettingsPage>();
-            services.AddSingleton<SettingsViewModel>();
-
-            services.AddSingleton<ToolPage>();
-            services.AddSingleton<ToolViewModel>();
-            
-            // 注册 INavigationAware
-            var assembly = Assembly.GetEntryAssembly();
-            if(assembly is null)
-                return;
-            
-            var types = assembly.GetTypes();
-            var navigationAwareTypes = types
-                .Where(t => t.GetInterfaces().Contains(typeof(INavigationAware)) && !t.IsInterface && !t.IsAbstract);
-            // /var navigableViewTypes = types.Where(t => t.GetInterfaces().Contains(typeof(INavigableView)));
-            
-            foreach (var type in navigationAwareTypes)
-            {
-                var serviceDescriptor = new ServiceDescriptor(type, type, ServiceLifetime.Singleton);
-                if (services.Contains(serviceDescriptor))
-                    continue;
-                    
-                services.AddSingleton(serviceDescriptor);
-            }
         }).Build();
+
+    private static void AppViews(IServiceCollection services)
+    {
+        services.AddSingleton<INavigationWindow, MainWindow>();
+        services.AddSingleton<MainWindowViewModel>();
+
+        services.AddSingleton<DashboardPage>();
+        services.AddSingleton<DashboardViewModel>();
+
+        services.AddSingleton<DataPage>();
+        services.AddSingleton<DataViewModel>();
+
+        services.AddSingleton<SettingsPage>();
+        services.AddSingleton<SettingsViewModel>();
+
+        services.AddSingleton<ToolPage>();
+        services.AddSingleton<ToolViewModel>();
+        
+        // 注册 INavigationAware
+        var assembly = Assembly.GetEntryAssembly();
+        if (assembly is null)
+            return;
+        
+        var types = assembly.GetTypes();
+        var appViewTypes = types
+            .Where(t => t.GetInterfaces().Contains(typeof(IAppView)) && !t.IsInterface && !t.IsAbstract);
+        var appViewModelsType = types.Where(t => t.GetInterfaces().Contains(typeof(IAppViewModel)));
+        
+        foreach (var type in appViewTypes)
+        {
+            var serviceDescriptor = new ServiceDescriptor(type, type, ServiceLifetime.Singleton);
+            if (services.Contains(serviceDescriptor))
+                continue;
+        
+            services.AddSingleton(type);
+        }
+
+        foreach (var type in appViewModelsType)
+        {
+            var serviceDescriptor = new ServiceDescriptor(type, type, ServiceLifetime.Singleton);
+            if (services.Contains(serviceDescriptor))
+                continue;
+        
+            services.AddSingleton(type);
+        }
+    }
+
+    private static void WpfUIServers(IServiceCollection services)
+    {
+        // Page resolver service
+        services.AddSingleton<INavigationViewPageProvider, PageService>();
+
+        // Theme manipulation
+        services.AddSingleton<IThemeService, ThemeService>();
+
+        // TaskBar manipulation
+        services.AddSingleton<ITaskBarService, TaskBarService>();
+
+        // Service containing navigation, same as INavigationWindow... but without window
+        services.AddSingleton<INavigationService, NavigationService>();
+    }
 
     /// <summary>
     /// Gets registered service.
     /// </summary>
-    /// <typeparam name="T">Type of the service to get.</typeparam>
-    /// <returns>Instance of the service or <see langword="null" />.</returns>
+    /// <typeparam name="T"> Type of the service to get. </typeparam>
+    /// <returns> Instance of the service or <see langword="null" />. </returns>
     public static T GetService<T>()
         where T : class
     {
@@ -94,7 +117,7 @@ public partial class App
     /// Get Application Version
     /// </summary>
     /// <returns> Assembly.GetExecutingAssembly().GetName().Version </returns>
-    public static System.Version? GetAppVersion()
+    public static Version? GetAppVersion()
     {
         return Assembly.GetExecutingAssembly().GetName().Version;
     }

@@ -8,8 +8,8 @@ namespace AttributeTest;
 public enum MyTaskEnum
 {
     None,
-    One, 
-    Two, 
+    One,
+    Two,
     Three
 }
 
@@ -25,23 +25,22 @@ public interface IMyTask
 /// MyTaskAttribute
 /// </summary>
 [AttributeUsage(AttributeTargets.Class |
-                AttributeTargets.Interface, AllowMultiple = false)]
+                AttributeTargets.Interface)]
 public class MyTaskAttribute : Attribute
 {
     public MyTaskAttribute(MyTaskEnum taskEnum, params string[] values)
     {
-        this.TaskEnum = taskEnum;
-        this.Values = values;
+        TaskEnum = taskEnum;
+        Values = values;
     }
 
     public MyTaskAttribute(Person person)
     {
-
     }
 
-    public MyTaskEnum TaskEnum { get; private set; }
+    public MyTaskEnum TaskEnum { get; }
 
-    public string Name { get;  set; }
+    public string Name { get; set; }
 
     public string[] Values { get; private set; }
 }
@@ -49,7 +48,7 @@ public class MyTaskAttribute : Attribute
 /// <summary>
 /// 使用不定参数来定义一些内容
 /// </summary>
-[MyTask(MyTaskEnum.One,"1","2")]
+[MyTask(MyTaskEnum.One, "1", "2")]
 public class MyTaskOne : IMyTask
 {
 }
@@ -57,16 +56,14 @@ public class MyTaskOne : IMyTask
 /// <summary>
 /// 单属性初始化
 /// </summary>
-[MyTask(MyTaskEnum.Two,null,Name = "Name")]
+[MyTask(MyTaskEnum.Two, null, Name = "Name")]
 public class MyTaskTwo : IMyTask
 {
-
 }
 
 [MyTask(MyTaskEnum.Three)]
 public class MyTaskThree : IMyTask
 {
-
 }
 
 internal static class TestAuthorAttribute
@@ -77,7 +74,7 @@ internal static class TestAuthorAttribute
     private static IEnumerable<Type> GetInterfaceTypes()
     {
         // 获取当前程序集中实现了IMyInterface接口的所有类型
-        Type interfaceType = typeof(IMyTask);
+        var interfaceType = typeof(IMyTask);
         var implementingTypes = Assembly.GetExecutingAssembly().GetTypes()
             .Where(type => interfaceType.IsAssignableFrom(type) && !type.IsInterface);
         return implementingTypes;
@@ -88,14 +85,10 @@ internal static class TestAuthorAttribute
         var pubTypes = GetInterfaceTypes();
         foreach (var pubType in pubTypes)
         {
-            System.Attribute[] attrs = System.Attribute.GetCustomAttributes(pubType); // Reflection.
-            foreach (System.Attribute attr in attrs)
-            {
+            Attribute[] attrs = Attribute.GetCustomAttributes(pubType); // Reflection.
+            foreach (var attr in attrs)
                 if (attr is MyTaskAttribute myTaskAttribute)
-                {
-                    System.Console.WriteLine($"   {myTaskAttribute.TaskEnum}");
-                }
-            }
+                    Console.WriteLine($"   {myTaskAttribute.TaskEnum}");
         }
 
         //PrintAuthorInfo(typeof(MyTaskOne));
@@ -103,20 +96,16 @@ internal static class TestAuthorAttribute
         //PrintAuthorInfo(typeof(MyTaskThree));
     }
 
-    private static void PrintAuthorInfo(System.Type t)
+    private static void PrintAuthorInfo(Type t)
     {
-        System.Console.WriteLine($"Author information for {t}");
+        Console.WriteLine($"Author information for {t}");
 
         // Using reflection.
-        System.Attribute[] attrs = System.Attribute.GetCustomAttributes(t); // Reflection.
+        Attribute[] attrs = Attribute.GetCustomAttributes(t); // Reflection.
 
         // Displaying output.
-        foreach (System.Attribute attr in attrs)
-        {
+        foreach (var attr in attrs)
             if (attr is MyTaskAttribute a)
-            {
-                System.Console.WriteLine($"   {a.TaskEnum}");
-            }
-        }
+                Console.WriteLine($"   {a.TaskEnum}");
     }
 }

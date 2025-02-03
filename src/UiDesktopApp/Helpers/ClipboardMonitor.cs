@@ -5,10 +5,9 @@ using System.Windows.Media.Imaging;
 namespace UiDesktopApp.Helpers;
 
 /// <summary>
-/// 
 /// </summary>
-/// <remarks></remarks>
-/// <inheritdoc>https://github.com/mrousavy/ClipboardMonitor/tree/master</inheritdoc>
+/// <remarks> </remarks>
+/// <inheritdoc> https://github.com/mrousavy/ClipboardMonitor/tree/master </inheritdoc>
 public class ClipboardMonitor : Window
 {
     private IntPtr _nextClipboardViewer;
@@ -64,6 +63,7 @@ public class ClipboardMonitor : Window
         set =>
             SetValue(ClipboardContainsImageProperty, value);
     }
+
     public bool ClipboardContainsText
     {
         get =>
@@ -71,6 +71,7 @@ public class ClipboardMonitor : Window
         set =>
             SetValue(ClipboardContainsTextProperty, value);
     }
+
     public string? ClipboardText
     {
         get =>
@@ -78,6 +79,7 @@ public class ClipboardMonitor : Window
         set =>
             SetValue(ClipboardTextProperty, value);
     }
+
     public BitmapSource? ClipboardImage
     {
         get =>
@@ -90,7 +92,9 @@ public class ClipboardMonitor : Window
 
     #region Routed Events
 
-    public static readonly RoutedEvent ClipboardDataEvent = EventManager.RegisterRoutedEvent("ClipboardData", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Window));
+    public static readonly RoutedEvent ClipboardDataEvent = EventManager.RegisterRoutedEvent("ClipboardData",
+        RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Window));
+
     /// <summary>
     /// Fires upon Clipboard Content change
     /// </summary>
@@ -174,13 +178,9 @@ public class ClipboardMonitor : Window
         OnRaiseClipboardData(new ClipboardDataEventArgs(ClipboardDataEvent, clipboardData));
 
         if (clipboardData.GetDataPresent(DataFormats.Bitmap))
-        {
             ClipboardImage = ClipboardContainsImage ? clipboardData.GetData(DataFormats.Bitmap) as BitmapSource : null;
-        }
-        if(clipboardData.GetDataPresent(DataFormats.Text))
-        {
+        if (clipboardData.GetDataPresent(DataFormats.Text))
             ClipboardText = ClipboardContainsText ? clipboardData.GetData(DataFormats.Text) as string : string.Empty;
-        }
     }
 
     #endregion

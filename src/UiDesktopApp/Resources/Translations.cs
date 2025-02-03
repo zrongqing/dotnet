@@ -1,6 +1,5 @@
-namespace UiDesktopApp.Resources
+namespace UiDesktopApp.Resources;
+
+public class Translations
 {
-    public partial class Translations
-    {
-    }
 }

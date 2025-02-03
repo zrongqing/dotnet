@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace TypeTest;
 
-namespace TypeTest
+internal class CADLinkType : ElementType
 {
-    internal class CADLinkType : ElementType
-    {
-    }
 }

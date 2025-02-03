@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.SqlServer;
-using System.Text;
 
-namespace AppEntity
+namespace AppEntity;
+
+public class AppContextConfiguration : DbConfiguration
 {
-    public class AppContextConfiguration:DbConfiguration
+    public AppContextConfiguration()
     {
-        public AppContextConfiguration() 
-        {
-            SetExecutionStrategy("System.Data.SqlClient", () => new SqlAzureExecutionStrategy());
+        SetExecutionStrategy("System.Data.SqlClient", () => new SqlAzureExecutionStrategy());
 
-            // 对由 Code First 中的约定创建的数据库使用本地 DB
-            SetDefaultConnectionFactory(new LocalDbConnectionFactory("mssqllocaldb"));
-        }
+        // 对由 Code First 中的约定创建的数据库使用本地 DB
+        SetDefaultConnectionFactory(new LocalDbConnectionFactory("mssqllocaldb"));
     }
 }

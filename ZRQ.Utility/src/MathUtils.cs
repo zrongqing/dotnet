@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ZRQ.Utils;
+﻿namespace ZRQ.Utils;
 
 public class MathUtils
 {
@@ -24,7 +20,7 @@ public class MathUtils
     /// <returns> </returns>
     public static double ToAngle(double radian)
     {
-        return (radian * 180) / Math.PI;
+        return radian * 180 / Math.PI;
     }
 
     /// <summary>

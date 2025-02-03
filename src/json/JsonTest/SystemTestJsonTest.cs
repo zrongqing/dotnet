@@ -1,33 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 
-namespace JsonTest
+namespace JsonTest;
+
+internal class SystemTestJsonTest
 {
-    internal class SystemTestJsonTest
+    public static void Process()
     {
-        public static void Process()
+        var jsonString = string.Empty;
+
+        WeatherForecast weatherForecast = new WeatherForecastDerived();
+
+        var options = new JsonSerializerOptions
         {
-            string jsonString = string.Empty;
+            WriteIndented = true
+        };
 
-            WeatherForecast weatherForecast = new WeatherForecastDerived();
+        jsonString = JsonSerializer.Serialize(weatherForecast, options);
+        Console.WriteLine(jsonString);
 
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true
-            };
+        jsonString = JsonSerializer.Serialize<object>(weatherForecast, options);
+        Console.WriteLine(jsonString);
 
-            jsonString = JsonSerializer.Serialize<WeatherForecast>(weatherForecast, options);
-            Console.WriteLine(jsonString);
-
-            jsonString = JsonSerializer.Serialize<object>(weatherForecast, options);
-            Console.WriteLine(jsonString);
-
-            jsonString = JsonSerializer.Serialize(weatherForecast, weatherForecast.GetType(), options);
-            Console.WriteLine(jsonString);
-        }
+        jsonString = JsonSerializer.Serialize(weatherForecast, weatherForecast.GetType(), options);
+        Console.WriteLine(jsonString);
     }
 }

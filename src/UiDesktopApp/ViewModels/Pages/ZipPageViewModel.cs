@@ -1,42 +1,28 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
+using Microsoft.Win32;
 
-namespace UiDesktopApp.ViewModels.Pages
+namespace UiDesktopApp.ViewModels.Pages;
+
+public partial class ZipPageViewModel : ObservableObject
 {
-    public partial class ZipPageViewModel: ObservableObject
+    [ObservableProperty] private string _openedFilePath = string.Empty;
+
+    [ObservableProperty] private string _pageLog = "This is page log";
+
+    [RelayCommand]
+    private void OnOpenZipFile()
     {
-        [ObservableProperty]
-        private string _pageLog = "This is page log";
-
-        [ObservableProperty]
-        private string _openedFilePath = string.Empty;
-
-        [RelayCommand]
-        private void OnOpenZipFile()
-        {
-            OpenFileDialog openFileDialog =
-                new()
-                {
-                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    Filter = "ZIP files (*.ZIP)|*.ZIP"
-                };
-
-            if (openFileDialog.ShowDialog() != true)
+        OpenFileDialog openFileDialog =
+            new()
             {
-                return;
-            }
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                Filter = "ZIP files (*.ZIP)|*.ZIP"
+            };
 
-            if (!File.Exists(openFileDialog.FileName))
-            {
-                return;
-            }
+        if (openFileDialog.ShowDialog() != true) return;
 
-            OpenedFilePath = openFileDialog.FileName;
-        }
+        if (!File.Exists(openFileDialog.FileName)) return;
+
+        OpenedFilePath = openFileDialog.FileName;
     }
 }

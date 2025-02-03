@@ -1,12 +1,11 @@
-﻿namespace AttributeTest
+﻿namespace AttributeTest;
+
+internal class Program
 {
-    internal class Program
+    private static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            TestAuthorAttribute.Test();
-            
-            Console.WriteLine("Hello, World!");
-        }
+        TestAuthorAttribute.Test();
+
+        Console.WriteLine("Hello, World!");
     }
 }

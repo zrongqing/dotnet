@@ -1,4 +1,6 @@
-﻿namespace ZRQ.Utils;
+﻿using System.Text.RegularExpressions;
+
+namespace ZRQ.Utils;
 
 public static class PathUtils
 {
@@ -34,13 +36,13 @@ public static class PathUtils
     public static string NormalizePath(string path)
     {
         // 将相对路径转换为绝对路径
-        string absolutePath = Path.GetFullPath(path);
+        var absolutePath = Path.GetFullPath(path);
 
         // 将路径分隔符统一为 "/"
         absolutePath = absolutePath.Replace('\\', '/');
 
         // 将多个连续的 "/" 替换为单个 "/"
-        absolutePath = System.Text.RegularExpressions.Regex.Replace(absolutePath, @"\/{2,}", "/");
+        absolutePath = Regex.Replace(absolutePath, @"\/{2,}", "/");
 
         // 返回标准化后的路径
         return absolutePath;

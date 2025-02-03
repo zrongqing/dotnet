@@ -8,7 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Stytles\" />
+        <Folder Include="Stytles\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="WPF-UI.Abstractions" Version="4.0.0" />
     </ItemGroup>
 
 </Project>
