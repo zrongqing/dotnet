@@ -28,6 +28,12 @@ namespace UiDesktopApp.ViewModels.Windows
                 Content = "Tool",
                 Icon = new SymbolIcon{Symbol = SymbolRegular.Toolbox24},
                 TargetPageType= typeof(Views.Pages.ToolPage)
+            },
+            new NavigationViewItem()
+            {
+                Content = "ListView",
+                Icon = new SymbolIcon{Symbol = SymbolRegular.TextBulletListTree24},
+                TargetPageType = typeof(Views.Pages.ListViewPage)
             }
         };
 

@@ -10,6 +10,7 @@ using UiDesktopApp.ViewModels.Windows;
 using UiDesktopApp.Views.Pages;
 using UiDesktopApp.Views.Windows;
 using Wpf.Ui;
+using Wpf.Ui.Controls;
 
 namespace UiDesktopApp;
 
@@ -57,6 +58,25 @@ public partial class App
 
             services.AddSingleton<ToolPage>();
             services.AddSingleton<ToolViewModel>();
+            
+            // 注册 INavigationAware
+            var assembly = Assembly.GetEntryAssembly();
+            if(assembly is null)
+                return;
+            
+            var types = assembly.GetTypes();
+            var navigationAwareTypes = types
+                .Where(t => t.GetInterfaces().Contains(typeof(INavigationAware)) && !t.IsInterface && !t.IsAbstract);
+            // /var navigableViewTypes = types.Where(t => t.GetInterfaces().Contains(typeof(INavigableView)));
+            
+            foreach (var type in navigationAwareTypes)
+            {
+                var serviceDescriptor = new ServiceDescriptor(type, type, ServiceLifetime.Singleton);
+                if (services.Contains(serviceDescriptor))
+                    continue;
+                    
+                services.AddSingleton(serviceDescriptor);
+            }
         }).Build();
 
     /// <summary>
