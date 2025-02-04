@@ -11,6 +11,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Light" />
                 <ui:ControlsDictionary />
+                <!-- 引用位于其他程序集中的 TreeView 样式文件 -->
+                <ResourceDictionary Source="pack://application:,,,/App.UI;component/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

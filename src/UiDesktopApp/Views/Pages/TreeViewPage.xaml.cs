@@ -4,9 +4,9 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace UiDesktopApp.Views.Pages;
 
-public partial class ListViewPage : INavigableView<ListViewModel>,IAppView
+public partial class TreeViewPage : INavigableView<TreeViewModel>,IAppView
 {
-    public ListViewPage(ListViewModel viewModel)
+    public TreeViewPage(TreeViewModel viewModel)
     {
         ViewModel = viewModel;
         DataContext = this;
@@ -14,5 +14,5 @@ public partial class ListViewPage : INavigableView<ListViewModel>,IAppView
         InitializeComponent();
     }
 
-    public ListViewModel ViewModel { get; }
+    public TreeViewModel ViewModel { get; }
 }

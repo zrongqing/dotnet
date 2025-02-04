@@ -5,14 +5,20 @@
         <LangVersion>latestmajor</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
     </PropertyGroup>
-
-    <ItemGroup>
-        <Folder Include="Stytles\"/>
-    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="WPF-UI.Abstractions" Version="4.0.0" />
     </ItemGroup>
 
+<!--    <ItemGroup>-->
+<!--      <Page Include="Stytles\TreeView.xaml">-->
+<!--        <Generator>MSBuild:Compile</Generator>-->
+<!--        <XamlRuntime>Wpf</XamlRuntime>-->
+<!--        <SubType>Designer</SubType>-->
+<!--      </Page>-->
+<!--    </ItemGroup>-->
+<!--    -->
 </Project>

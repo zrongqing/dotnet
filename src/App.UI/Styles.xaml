@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <ResourceDictionary.MergedDictionaries>
+            <!-- 添加新的 TreeView 样式文件 -->
+            <ResourceDictionary Source="Stytles/TreeView.xaml"/>
+        </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

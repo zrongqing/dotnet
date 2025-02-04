@@ -42,7 +42,7 @@ public partial class MainWindowViewModel : ObservableObject
         {
             Content = "ListView",
             Icon = new SymbolIcon { Symbol = SymbolRegular.TextBulletListTree24 },
-            TargetPageType = typeof(ListViewPage)
+            TargetPageType = typeof(TreeViewPage)
         }
     };
 
