@@ -20,6 +20,16 @@ namespace UiDesktopApp;
 /// </summary>
 public partial class App
 {
+    public App()
+    {
+        // Properties 相当于一个字典，可以在XAML或者代码中直接使用
+        Properties["StartupPath"] = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        Properties["StartupArgs"] = Environment.GetCommandLineArgs();
+        Properties["UserDataPath"] = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        Properties["UserName"] = Environment.UserName;
+    }
+    
+    
     // The.NET Generic Host provides dependency injection, configuration, logging, and other services.
     // https://docs.microsoft.com/dotnet/core/extensions/generic-host
     // https://docs.microsoft.com/dotnet/core/extensions/dependency-injection

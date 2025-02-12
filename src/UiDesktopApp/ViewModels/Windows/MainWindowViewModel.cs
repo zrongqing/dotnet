@@ -6,9 +6,11 @@ namespace UiDesktopApp.ViewModels.Windows;
 
 public partial class MainWindowViewModel : ObservableObject
 {
-    [ObservableProperty] private string _applicationTitle = "WPF UI - UiDesktopApp";
+    [ObservableProperty] 
+    private string _applicationTitle = "WPF UI - UiDesktopApp";
 
-    [ObservableProperty] private ObservableCollection<object> _footerMenuItems = new()
+    [ObservableProperty] 
+    private ObservableCollection<object> _footerMenuItems = new()
     {
         new NavigationViewItem
         {
@@ -18,7 +20,8 @@ public partial class MainWindowViewModel : ObservableObject
         }
     };
 
-    [ObservableProperty] private ObservableCollection<object> _menuItems = new()
+    [ObservableProperty] 
+    private ObservableCollection<object> _menuItems = new()
     {
         new NavigationViewItem
         {
@@ -46,7 +49,8 @@ public partial class MainWindowViewModel : ObservableObject
         }
     };
 
-    [ObservableProperty] private ObservableCollection<MenuItem> _trayMenuItems = new()
+    [ObservableProperty] 
+    private ObservableCollection<MenuItem> _trayMenuItems = new()
     {
         new MenuItem { Header = "Home", Tag = "tray_home" }
     };
