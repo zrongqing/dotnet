@@ -1,9 +1,11 @@
-﻿using System.IO;
+﻿using System.CodeDom;
+using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
 using App.UI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using UiDesktopApp.Services;
 using UiDesktopApp.ViewModels.Pages;
@@ -14,6 +16,19 @@ using Wpf.Ui;
 using Wpf.Ui.Abstractions;
 
 namespace UiDesktopApp;
+
+public interface ICommon<T>
+{
+    public string Test();
+}
+
+public class Common<T>  : ICommon<T> 
+{
+    public string Test()
+    {
+        return "Common";
+    }
+}
 
 /// <summary>
 /// Interaction logic for App.xaml
@@ -43,7 +58,12 @@ public partial class App
         {
             services.AddHostedService<ApplicationHostService>();
 
+            // services.TryAddScoped(typeof(ICommon<>), typeof(Common<>));
+            
+            TestAddTClass(services);
+            
             WpfUIServers(services);
+            
 
             // Main window with navigation
             AppViews(services);
@@ -51,6 +71,29 @@ public partial class App
 
         }).Build();
 
+    private static void TestAddTClass(IServiceCollection services)
+    {
+        var assembly = Assembly.GetEntryAssembly();
+        if (assembly is null)
+            return;
+
+        var types = assembly.GetTypes().Where(t => !t.IsInterface && !t.IsAbstract);
+        foreach (var type in types)
+        {
+            var name = type.Name;
+            var interfaceType = type.GetInterfaces().ToList().Find(p => p.Name.Equals($"I{name}"));
+            if (interfaceType is null)
+            {
+                continue;
+            }
+            
+            var openGeneric = interfaceType.IsGenericTypeDefinition ? interfaceType :
+                interfaceType.GetGenericTypeDefinition();
+            
+            services.AddSingleton(openGeneric, type);
+        }
+    }
+    
     private static void AppViews(IServiceCollection services)
     {
         services.AddSingleton<INavigationWindow, MainWindow>();

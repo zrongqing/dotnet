@@ -24,7 +24,7 @@
     <ItemGroup>
         <PackageReference Include="DotNetZip" Version="1.16.0"/>
         <PackageReference Include="WPF-UI" Version="4.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0 "/>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2 "/>
         <PackageReference Include="WPF-UI.Abstractions" Version="4.0.0"/>
     </ItemGroup>
