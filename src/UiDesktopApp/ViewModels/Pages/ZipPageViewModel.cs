@@ -3,7 +3,7 @@ using Microsoft.Win32;
 
 namespace UiDesktopApp.ViewModels.Pages;
 
-public partial class ZipPageViewModel : ObservableObject
+public partial class ZipPageViewModel : ViewModel
 {
     [ObservableProperty] private string _openedFilePath = string.Empty;
 

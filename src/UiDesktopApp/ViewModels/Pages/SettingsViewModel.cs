@@ -4,7 +4,7 @@ using Wpf.Ui.Appearance;
 
 namespace UiDesktopApp.ViewModels.Pages;
 
-public partial class SettingsViewModel : ObservableObject, INavigationAware
+public partial class SettingsViewModel : ViewModel
 {
     [ObservableProperty] private string _appVersion = string.Empty;
 

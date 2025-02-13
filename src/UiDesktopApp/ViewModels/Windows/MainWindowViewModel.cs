@@ -46,6 +46,12 @@ public partial class MainWindowViewModel : ObservableObject
             Content = "ListView",
             Icon = new SymbolIcon { Symbol = SymbolRegular.TextBulletListTree24 },
             TargetPageType = typeof(TreeViewPage)
+        },
+        new NavigationViewItem
+        {
+            Content = "Video",
+            Icon = new SymbolIcon { Symbol = SymbolRegular.Video24 },
+            TargetPageType = typeof(VideoPage)
         }
     };
 

@@ -9,8 +9,10 @@ namespace UiDesktopApp.Views.Windows;
 public partial class MainWindow : INavigationWindow
 {
     public MainWindow(
-        MainWindowViewModel viewModel,
-        INavigationService navigationService
+        MainWindowViewModel   viewModel,
+        INavigationService    navigationService,
+        ISnackbarService      snackbarService,
+        IContentDialogService contentDialogService
     )
     {
         ViewModel = viewModel;
@@ -19,7 +21,10 @@ public partial class MainWindow : INavigationWindow
         SystemThemeWatcher.Watch(this);
 
         InitializeComponent();
+        
+        snackbarService.SetSnackbarPresenter(SnackbarPresenter);
         navigationService.SetNavigationControl(RootNavigation);
+        contentDialogService.SetDialogHost(RootContentDialog);
     }
 
     public MainWindowViewModel ViewModel { get; }

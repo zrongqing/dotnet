@@ -5,7 +5,7 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace UiDesktopApp.ViewModels.Pages;
 
-public partial class ToolViewModel : ObservableObject, INavigationAware
+public partial class ToolViewModel : ViewModel
 {
     private ClipboardMonitor? _clipbordMonitor;
 

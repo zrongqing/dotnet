@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net8.0-windows7.0</TargetFramework>
+        <TargetFramework>net8.0-windows</TargetFramework>
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <ApplicationIcon>wpfui-icon.ico</ApplicationIcon>
         <UseWPF>true</UseWPF>
@@ -23,6 +23,7 @@
 
     <ItemGroup>
         <PackageReference Include="DotNetZip" Version="1.16.0"/>
+        <PackageReference Include="FFMpegCore" Version="5.1.0" />
         <PackageReference Include="WPF-UI" Version="4.0.0"/>
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2 "/>
@@ -40,6 +41,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\App.Common\App.Common.csproj" />
       <ProjectReference Include="..\App.UI\App.UI.csproj" />
     </ItemGroup>
 

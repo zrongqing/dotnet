@@ -1,11 +1,10 @@
 ﻿using System.Collections.ObjectModel;
-using App.UI;
 using UiDesktopApp.Models;
 using Wpf.Ui.Abstractions.Controls;
 
 namespace UiDesktopApp.ViewModels.Pages;
 
-public partial class TreeViewModel : ObservableObject, INavigationAware,IAppViewModel
+public partial class TreeViewModel : ViewModel
 {
     [ObservableProperty]
     private ObservableCollection<TreeNode> _treeNodes;

@@ -1,8 +1,8 @@
 ﻿using System.CodeDom;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
-using App.UI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -14,21 +14,11 @@ using UiDesktopApp.Views.Pages;
 using UiDesktopApp.Views.Windows;
 using Wpf.Ui;
 using Wpf.Ui.Abstractions;
+using Wpf.Ui.Abstractions.Controls;
+using App.Common.Utility;
+using UiDesktopApp.DependencyModel;
 
 namespace UiDesktopApp;
-
-public interface ICommon<T>
-{
-    public string Test();
-}
-
-public class Common<T>  : ICommon<T> 
-{
-    public string Test()
-    {
-        return "Common";
-    }
-}
 
 /// <summary>
 /// Interaction logic for App.xaml
@@ -60,14 +50,10 @@ public partial class App
 
             // services.TryAddScoped(typeof(ICommon<>), typeof(Common<>));
             
-            TestAddTClass(services);
+            // TestAddTClass(services);
             
-            WpfUIServers(services);
-            
-
             // Main window with navigation
-            AppViews(services);
-
+            WpfUiServers(services);
 
         }).Build();
 
@@ -93,66 +79,61 @@ public partial class App
             services.AddSingleton(openGeneric, type);
         }
     }
-    
-    private static void AppViews(IServiceCollection services)
+
+    private static void WpfUiServers(IServiceCollection services)
     {
+        // Main window container with navigation
+        _ = services.AddSingleton<MainWindowViewModel>();
+        // Service containing navigation, same as INavigationWindow... but without window
+        _ = services.AddSingleton<INavigationService, NavigationService>();
+        _ = services.AddSingleton<ISnackbarService, SnackbarService>();
+        _ = services.AddTransient<Wpf.Ui.Controls.SnackbarPresenter>();
+        _ = services.AddSingleton<IContentDialogService, ContentDialogService>();
+        // Page resolver service
+        services.AddSingleton<INavigationViewPageProvider, PageService>();
         services.AddSingleton<INavigationWindow, MainWindow>();
-        services.AddSingleton<MainWindowViewModel>();
-
-        services.AddSingleton<DashboardPage>();
-        services.AddSingleton<DashboardViewModel>();
-
-        services.AddSingleton<DataPage>();
-        services.AddSingleton<DataViewModel>();
-
-        services.AddSingleton<SettingsPage>();
-        services.AddSingleton<SettingsViewModel>();
-
-        services.AddSingleton<ToolPage>();
-        services.AddSingleton<ToolViewModel>();
+        // Theme manipulation
+        services.AddSingleton<IThemeService, ThemeService>();
+        // TaskBar manipulation
+        services.AddSingleton<ITaskBarService, TaskBarService>();
+        _ = services.AddSingleton<WindowsProviderService>();
         
         // 注册 INavigationAware
         var assembly = Assembly.GetEntryAssembly();
         if (assembly is null)
             return;
         
-        var types = assembly.GetTypes();
-        var appViewTypes = types
-            .Where(t => t.GetInterfaces().Contains(typeof(IAppView)) && !t.IsInterface && !t.IsAbstract);
-        var appViewModelsType = types.Where(t => t.GetInterfaces().Contains(typeof(IAppViewModel)));
+        // All other pages and view models
+        _ = services.AddTransientFromNamespace("UiDesktopApp.Views", AppAssembly.Asssembly);
+        _ = services.AddTransientFromNamespace(
+            "UiDesktopApp.ViewModels",
+            AppAssembly.Asssembly
+        );
         
-        foreach (var type in appViewTypes)
-        {
-            var serviceDescriptor = new ServiceDescriptor(type, type, ServiceLifetime.Singleton);
-            if (services.Contains(serviceDescriptor))
-                continue;
-        
-            services.AddSingleton(type);
-        }
-
-        foreach (var type in appViewModelsType)
-        {
-            var serviceDescriptor = new ServiceDescriptor(type, type, ServiceLifetime.Singleton);
-            if (services.Contains(serviceDescriptor))
-                continue;
-        
-            services.AddSingleton(type);
-        }
-    }
-
-    private static void WpfUIServers(IServiceCollection services)
-    {
-        // Page resolver service
-        services.AddSingleton<INavigationViewPageProvider, PageService>();
-
-        // Theme manipulation
-        services.AddSingleton<IThemeService, ThemeService>();
-
-        // TaskBar manipulation
-        services.AddSingleton<ITaskBarService, TaskBarService>();
-
-        // Service containing navigation, same as INavigationWindow... but without window
-        services.AddSingleton<INavigationService, NavigationService>();
+        //
+        // var types = assembly.GetTypes();
+        // var appViewTypes = types
+        //    .Where(t => t is { IsInterface: false, IsAbstract: false} 
+        //             &&  t.IsImplementingInterface(typeof(INavigableView<>)));
+        // var appViewModelsType = types.Where(t => t.IsImplementingInterface(typeof(INavigationAware)));
+        //
+        // foreach (var type in appViewTypes)
+        // {
+        //     var serviceDescriptor = new ServiceDescriptor(type, type, ServiceLifetime.Singleton);
+        //     if (services.Contains(serviceDescriptor))
+        //         continue;
+        //
+        //     services.AddSingleton(type);
+        // }
+        //
+        // foreach (var type in appViewModelsType)
+        // {
+        //     var serviceDescriptor = new ServiceDescriptor(type, type, ServiceLifetime.Singleton);
+        //     if (services.Contains(serviceDescriptor))
+        //         continue;
+        //
+        //     services.AddSingleton(type);
+        // }
     }
 
     /// <summary>

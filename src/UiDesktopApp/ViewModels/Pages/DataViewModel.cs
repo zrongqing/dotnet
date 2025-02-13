@@ -4,7 +4,7 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace UiDesktopApp.ViewModels.Pages;
 
-public partial class DataViewModel : ObservableObject, INavigationAware
+public partial class DataViewModel : ViewModel
 {
     [ObservableProperty] private IEnumerable<DataColor> _colors;
 

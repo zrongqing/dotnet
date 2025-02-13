@@ -1,0 +1,46 @@
+﻿<Page x:Class="UiDesktopApp.Views.Pages.VideoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:UiDesktopApp.Views.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d"
+      Title="VideoPage"
+      Height="450" 
+      Width="800"
+      d:DataContext="{d:DesignInstance local:VideoPage,IsDesignTimeCreatable=False}"
+      ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+      ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+      >
+    <StackPanel Orientation="Vertical">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <Label Grid.Row="0"
+                   Grid.Column="0">
+                视频路径：
+            </Label>
+            <TextBlock Grid.Row="0"
+                       Grid.Column="1"
+                       Text="{Binding ViewModel.VideoDirPath}"></TextBlock>
+        </Grid>
+        
+        <StackPanel Orientation="Horizontal">
+            <Button Content="转换成MP4"
+                    Command="{Binding ViewModel.VideoToMp4Command}"></Button>
+        </StackPanel>
+        
+        <Label Content="{Binding ViewModel.ConvertMessage}"
+               Height="30"></Label>
+        
+    </StackPanel>
+</Page>
