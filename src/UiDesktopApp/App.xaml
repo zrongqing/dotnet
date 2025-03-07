@@ -7,13 +7,27 @@
     Exit="OnExit"
     Startup="OnStartup">
     <Application.Resources>
+        
         <ResourceDictionary>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Light" />
                 <ui:ControlsDictionary />
                 <!-- 引用位于其他程序集中的 TreeView 样式文件 -->
-                <ResourceDictionary Source="pack://application:,,,/App.UI;component/Styles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/UiDesktopApp;component/Resources/Theme/Light.xaml"/> 
             </ResourceDictionary.MergedDictionaries>
+            
+            <!-- 自定义颜色 -->
+            <Color x:Key="PrimaryColor">#1890FF</Color>
+            <Color x:Key="BackgroundColor">#FFFFFF</Color>
+            <Color x:Key="TextColor">#000000</Color>
+
+            <!-- 应用到 WPFUI 主题 -->
+            <SolidColorBrush x:Key="SystemAccentColorBrush" Color="{StaticResource PrimaryColor}" />
+            <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="{StaticResource BackgroundColor}" />
+            <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="{StaticResource TextColor}" />
+            
         </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

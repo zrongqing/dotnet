@@ -18,7 +18,8 @@ public partial class MainWindow : INavigationWindow
         ViewModel = viewModel;
         DataContext = this;
 
-        SystemThemeWatcher.Watch(this);
+        // 会根据系统的主题进行切换
+        // SystemThemeWatcher.Watch(this);
 
         InitializeComponent();
         
