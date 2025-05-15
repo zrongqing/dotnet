@@ -1,14 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace App.Entities;
 
-namespace AppEntity;
-
-public class Order : BaseEntity
+public class Order : EntityBase
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid OrderId { get; set; }
-
     /// <summary>
     /// 商品名
     /// </summary>

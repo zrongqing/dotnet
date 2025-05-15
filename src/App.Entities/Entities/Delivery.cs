@@ -1,14 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace App.Entities;
 
-namespace AppEntity;
-
-public class Delivery : BaseEntity
+public class Delivery : EntityBase
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid DeliveryId { get; set; }
-
     /// <summary>
     /// 快递公司名
     /// </summary>

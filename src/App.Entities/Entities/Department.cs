@@ -1,18 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace App.Entities;
 
-namespace AppEntity;
-
-public class Department : BaseEntity
+public class Department : EntityBase
 {
     public Department()
     {
         Courses = new HashSet<Course>();
     }
-
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid DepartmentId { get; set; }
 
     public string Name { get; set; }
     public decimal Budget { get; set; }

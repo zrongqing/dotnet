@@ -1,12 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AppEntity;
+namespace App.Entities.Interfaces;
 
-public class BaseEntity
+public interface IUpdateTime
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public long Id { get; set; }
-
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime UpdateTime { get; set; }
 }
